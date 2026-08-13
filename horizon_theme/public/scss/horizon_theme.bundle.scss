@@ -1,0 +1,6 @@
+// Desk theme bundle. Loaded on every desk page via app_include_css in hooks.py.
+// Each partial scopes itself to [data-theme="<slug>"], matching a name in horizon_theme/theme_registry.py.
+
+@import "./theme_variables";
+@import "./themes/tekton_blue";
+@import "./themes/horizon_calm";
