@@ -1,0 +1,462 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-14 10:00:00.000000",
+ "description": "Site-wide colors for the Promantia Custom Theme. Each user activates it from Toggle Theme.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "navbar_tab",
+  "navbar_section",
+  "navbar_background_color",
+  "navbar_text_color",
+  "navbar_column_break",
+  "hide_help",
+  "hide_app_switcher",
+  "default_app",
+  "buttons_tab",
+  "primary_button_section",
+  "primary_button_background_color",
+  "primary_button_text_color",
+  "primary_button_column_break",
+  "primary_button_hover_background_color",
+  "primary_button_hover_text_color",
+  "secondary_button_section",
+  "secondary_button_background_color",
+  "secondary_button_text_color",
+  "secondary_button_column_break",
+  "secondary_button_hover_background_color",
+  "secondary_button_hover_text_color",
+  "desk_tab",
+  "body_section",
+  "body_background_color",
+  "content_background_color",
+  "body_column_break",
+  "content_text_color",
+  "sidebar_section",
+  "sidebar_background_color",
+  "sidebar_column_break",
+  "sidebar_text_color",
+  "input_section",
+  "input_background_color",
+  "input_border_color",
+  "input_column_break",
+  "input_text_color",
+  "input_label_color",
+  "table_section",
+  "table_head_background_color",
+  "table_head_text_color",
+  "table_column_break",
+  "table_body_background_color",
+  "table_body_text_color",
+  "number_card_section",
+  "number_card_background_color",
+  "number_card_border_color",
+  "number_card_column_break",
+  "number_card_text_color",
+  "login_tab",
+  "login_page_section",
+  "login_background_color",
+  "login_background_image",
+  "login_column_break",
+  "login_box_background_color",
+  "login_box_position",
+  "login_heading_text_color",
+  "login_button_section",
+  "login_button_background_color",
+  "login_button_text_color",
+  "login_button_column_break",
+  "login_button_hover_background_color",
+  "login_button_hover_text_color",
+  "footer_tab",
+  "footer_section",
+  "copyright_text",
+  "footer_powered_by",
+  "footer_column_break",
+  "footer_background_color",
+  "footer_text_color",
+  "sticky_footer"
+ ],
+ "fields": [
+  {
+   "fieldname": "navbar_tab",
+   "fieldtype": "Tab Break",
+   "label": "Navbar"
+  },
+  {
+   "description": "Leave a color blank to keep Frappe's own default for that element.",
+   "fieldname": "navbar_section",
+   "fieldtype": "Section Break",
+   "label": "Navbar"
+  },
+  {
+   "fieldname": "navbar_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "navbar_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "navbar_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Hides the Help dropdown in the navbar.",
+   "fieldname": "hide_help",
+   "fieldtype": "Check",
+   "label": "Hide Help"
+  },
+  {
+   "default": "0",
+   "description": "Hides the Apps entry in the navbar settings dropdown.",
+   "fieldname": "hide_app_switcher",
+   "fieldtype": "Check",
+   "label": "Hide App Switcher"
+  },
+  {
+   "depends_on": "eval:doc.hide_app_switcher == 1",
+   "description": "App the desk logo links to while the app switcher is hidden.",
+   "fieldname": "default_app",
+   "fieldtype": "Select",
+   "label": "Default App",
+   "mandatory_depends_on": "eval:doc.hide_app_switcher == 1"
+  },
+  {
+   "fieldname": "buttons_tab",
+   "fieldtype": "Tab Break",
+   "label": "Buttons"
+  },
+  {
+   "fieldname": "primary_button_section",
+   "fieldtype": "Section Break",
+   "label": "Primary Button"
+  },
+  {
+   "fieldname": "primary_button_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "primary_button_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "primary_button_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "primary_button_hover_background_color",
+   "fieldtype": "Color",
+   "label": "Hover Background Color"
+  },
+  {
+   "fieldname": "primary_button_hover_text_color",
+   "fieldtype": "Color",
+   "label": "Hover Text Color"
+  },
+  {
+   "fieldname": "secondary_button_section",
+   "fieldtype": "Section Break",
+   "label": "Secondary Button"
+  },
+  {
+   "fieldname": "secondary_button_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "secondary_button_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "secondary_button_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "secondary_button_hover_background_color",
+   "fieldtype": "Color",
+   "label": "Hover Background Color"
+  },
+  {
+   "fieldname": "secondary_button_hover_text_color",
+   "fieldtype": "Color",
+   "label": "Hover Text Color"
+  },
+  {
+   "fieldname": "desk_tab",
+   "fieldtype": "Tab Break",
+   "label": "Desk"
+  },
+  {
+   "fieldname": "body_section",
+   "fieldtype": "Section Break",
+   "label": "Body"
+  },
+  {
+   "fieldname": "body_background_color",
+   "fieldtype": "Color",
+   "label": "Page Background Color"
+  },
+  {
+   "fieldname": "content_background_color",
+   "fieldtype": "Color",
+   "label": "Content Area Background Color"
+  },
+  {
+   "fieldname": "body_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "content_text_color",
+   "fieldtype": "Color",
+   "label": "Content Area Text Color"
+  },
+  {
+   "fieldname": "sidebar_section",
+   "fieldtype": "Section Break",
+   "label": "Sidebar"
+  },
+  {
+   "fieldname": "sidebar_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "sidebar_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sidebar_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "input_section",
+   "fieldtype": "Section Break",
+   "label": "Inputs"
+  },
+  {
+   "fieldname": "input_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "description": "Frappe's inputs ship without a border - setting this draws one.",
+   "fieldname": "input_border_color",
+   "fieldtype": "Color",
+   "label": "Border Color"
+  },
+  {
+   "fieldname": "input_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "input_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "input_label_color",
+   "fieldtype": "Color",
+   "label": "Label Color"
+  },
+  {
+   "fieldname": "table_section",
+   "fieldtype": "Section Break",
+   "label": "Lists and Tables"
+  },
+  {
+   "fieldname": "table_head_background_color",
+   "fieldtype": "Color",
+   "label": "Head Background Color"
+  },
+  {
+   "fieldname": "table_head_text_color",
+   "fieldtype": "Color",
+   "label": "Head Text Color"
+  },
+  {
+   "fieldname": "table_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "table_body_background_color",
+   "fieldtype": "Color",
+   "label": "Body Background Color"
+  },
+  {
+   "fieldname": "table_body_text_color",
+   "fieldtype": "Color",
+   "label": "Body Text Color"
+  },
+  {
+   "fieldname": "number_card_section",
+   "fieldtype": "Section Break",
+   "label": "Number Cards"
+  },
+  {
+   "fieldname": "number_card_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "number_card_border_color",
+   "fieldtype": "Color",
+   "label": "Border Color"
+  },
+  {
+   "fieldname": "number_card_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "number_card_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "login_tab",
+   "fieldtype": "Tab Break",
+   "label": "Login Page"
+  },
+  {
+   "description": "The login page is site-wide - it applies to everyone signing in, not only to users who selected this theme.",
+   "fieldname": "login_page_section",
+   "fieldtype": "Section Break",
+   "label": "Login Page"
+  },
+  {
+   "fieldname": "login_background_color",
+   "fieldtype": "Color",
+   "label": "Page Background Color"
+  },
+  {
+   "fieldname": "login_background_image",
+   "fieldtype": "Attach Image",
+   "label": "Page Background Image",
+   "make_attachment_public": 1
+  },
+  {
+   "fieldname": "login_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "login_box_background_color",
+   "fieldtype": "Color",
+   "label": "Login Box Background Color"
+  },
+  {
+   "default": "Default",
+   "fieldname": "login_box_position",
+   "fieldtype": "Select",
+   "label": "Login Box Position",
+   "options": "Default\nLeft\nRight"
+  },
+  {
+   "fieldname": "login_heading_text_color",
+   "fieldtype": "Color",
+   "label": "Heading Text Color"
+  },
+  {
+   "fieldname": "login_button_section",
+   "fieldtype": "Section Break",
+   "label": "Login Button"
+  },
+  {
+   "fieldname": "login_button_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "login_button_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "login_button_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "login_button_hover_background_color",
+   "fieldtype": "Color",
+   "label": "Hover Background Color"
+  },
+  {
+   "fieldname": "login_button_hover_text_color",
+   "fieldtype": "Color",
+   "label": "Hover Text Color"
+  },
+  {
+   "fieldname": "footer_tab",
+   "fieldtype": "Tab Break",
+   "label": "Footer"
+  },
+  {
+   "description": "The desk footer appears only for users on the Promantia Custom Theme, and only once one of the two texts below is set.",
+   "fieldname": "footer_section",
+   "fieldtype": "Section Break",
+   "label": "Desk Footer"
+  },
+  {
+   "fieldname": "copyright_text",
+   "fieldtype": "Data",
+   "label": "Copyright Text"
+  },
+  {
+   "description": "Shown on the right of the footer. Plain text - HTML is escaped.",
+   "fieldname": "footer_powered_by",
+   "fieldtype": "Data",
+   "label": "Powered By Text"
+  },
+  {
+   "fieldname": "footer_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "footer_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "footer_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "default": "0",
+   "description": "Pins the footer to the bottom of the viewport.",
+   "fieldname": "sticky_footer",
+   "fieldtype": "Check",
+   "label": "Sticky Footer"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-14 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Promantia Theme",
+ "name": "Promantia Custom Theme",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

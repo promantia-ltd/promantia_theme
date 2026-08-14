@@ -1,5 +1,10 @@
 """Single source of truth for the desk themes this app makes selectable."""
 
+# --- Slugs ---
+# The one theme whose values come from a doctype instead of a stylesheet. Shared with
+# promantia_theme/custom_theme.py and public/js/custom_theme.js, which key off the same slug.
+CUSTOM_THEME_SLUG = "promantia-custom"
+
 # --- Registry ---
 # Frappe's built-in themes, re-declared so overriding ThemeSwitcher.fetch_themes() keeps them selectable.
 STOCK_DESK_THEMES = (
@@ -33,6 +38,11 @@ APP_DESK_THEMES = (
 		"name": "paper-ledger",
 		"label": "Paper Ledger",
 		"info": "Powder-blue chrome, cream data-entry surfaces and ink-black actions",
+	},
+	{
+		"name": CUSTOM_THEME_SLUG,
+		"label": "Promantia Custom Theme",
+		"info": "Colors a System Manager configures in the Promantia Custom Theme settings",
 	},
 )
 
