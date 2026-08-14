@@ -1,6 +1,6 @@
 # Promantia Theme
 
-Desk themes for Frappe v15. Adds three themes to the desk's **Switch Theme** dialog alongside the
+Desk themes for Frappe v15. Adds four themes to the desk's **Switch Theme** dialog alongside the
 stock Frappe Light / Timeless Night / Automatic:
 
 | Theme | Slug | Description |
@@ -8,6 +8,7 @@ stock Frappe Light / Timeless Night / Automatic:
 | Tekton Blue | `tekton-blue` | The deep blue desk theme carried over from the `Tekton-Theme` app, kept unchanged so sites moving off it keep their default look. |
 | Horizon Calm | `horizon-calm` | Light theme built from the `Horizontal_Main` "Calm Premium" design kit — soft surfaces, hairline borders, layered shadows and one muted indigo accent. |
 | Magenta Aurora | `magenta-aurora` | Vivid fuchsia brand theme — a plum-to-magenta gradient navbar with a white pill search field, a magenta page title, and solid-magenta active/selected fills on a near-white lavender ground. |
+| Paper Ledger | `paper-ledger` | Stationery-toned theme — powder-blue chrome, cream data-entry surfaces with inputs ruled like ledger paper, ink-black primary actions, pale blue sidebar pills that turn teal when active, and workspace widgets tinted inside a white card. |
 
 ## Install
 
