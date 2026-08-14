@@ -1,0 +1,485 @@
+// Magenta Aurora - vivid fuchsia brand theme on a near-white lavender ground.
+// Distinctive traits: a plum-to-magenta gradient navbar with a white pill search field,
+// a magenta page title, and solid-magenta fills for active/selected states.
+
+[data-theme="magenta-aurora"] {
+	/* --- Aurora palette --- */
+
+	/* surfaces - near-white with a faint lavender wash */
+	--theme-bg: #fbf7fb;
+	--theme-surface-1: #ffffff;
+	--theme-surface-2: #fdf9fc;
+	--theme-surface-3: #f6ecf4;
+	--theme-surface-hover: #fbe6f3;
+	--theme-sidebar: #fdfbfd;
+
+	/* hairlines carry a plum tint rather than neutral grey */
+	--theme-hairline: rgba(90, 12, 70, 0.1);
+	--theme-hairline-2: rgba(90, 12, 70, 0.06);
+	--theme-hairline-strong: rgba(90, 12, 70, 0.18);
+
+	/* text - near-black warmed toward plum */
+	--theme-text-1: #1b1120;
+	--theme-text-2: #4a3f4e;
+	--theme-text-3: #7b6c80;
+	--theme-text-4: #a99bad;
+
+	/* the magenta accent */
+	--theme-accent: #d81b8f;
+	--theme-accent-ink: #a81070;
+	--theme-accent-bright: #ec3aa5;
+	--theme-accent-soft: rgba(216, 27, 143, 0.1);
+	--theme-accent-line: rgba(216, 27, 143, 0.38);
+
+	/* the deep plum the navbar gradient starts from */
+	--theme-plum: #2b0a2d;
+
+	/* semantics, warmed to sit beside the magenta without clashing */
+	--theme-green: #17924f;
+	--theme-green-soft: rgba(23, 146, 79, 0.11);
+	--theme-amber: #b0700a;
+	--theme-amber-soft: rgba(176, 112, 10, 0.13);
+	--theme-red: #d13c2e;
+	--theme-red-soft: rgba(209, 60, 46, 0.1);
+	--theme-violet: #8c3fd0;
+	--theme-violet-soft: rgba(140, 63, 208, 0.1);
+
+	/* neutral ramp, tinted toward plum so greys never read cold */
+	--theme-gray-50: #fdf9fc;
+	--theme-gray-100: #f8f1f7;
+	--theme-gray-200: #f0e3ee;
+	--theme-gray-300: #e3d0e0;
+	--theme-gray-400: #c9aec6;
+	--theme-gray-500: #a99bad;
+	--theme-gray-600: #7b6c80;
+	--theme-gray-700: #4a3f4e;
+	--theme-gray-800: #33283a;
+	--theme-gray-900: #1b1120;
+
+	/* shadows tinted plum rather than neutral black */
+	--theme-shadow-1: 0 1px 2px rgba(72, 10, 56, 0.06);
+	--theme-shadow-2: 0 6px 20px rgba(72, 10, 56, 0.1);
+	--theme-shadow-3: 0 14px 40px rgba(72, 10, 56, 0.14);
+	--theme-shadow-pop: 0 24px 60px rgba(72, 10, 56, 0.2);
+
+	/* radii - tighter and more conventional than Horizon Calm */
+	--theme-radius-tiny: 5px;
+	--theme-radius-sm: 6px;
+	--theme-radius-base: 8px;
+	--theme-radius-md: 10px;
+	--theme-radius-lg: 12px;
+	--theme-radius-xl: 16px;
+	--theme-radius-2xl: 20px;
+
+	/* chrome */
+	--theme-font-stack: "InterVariable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		"Roboto", "Helvetica Neue", sans-serif;
+	--theme-navbar-bg: linear-gradient(
+		90deg,
+		var(--theme-plum) 0%,
+		#7a0f5c 34%,
+		#b91379 66%,
+		#e0208f 100%
+	);
+	--theme-navbar-fg: #ffffff;
+	--theme-navbar-fg-muted: rgba(255, 255, 255, 0.78);
+	--theme-scrollbar-thumb: rgba(216, 27, 143, 0.28);
+	--theme-scrollbar-track: transparent;
+
+	/* motion */
+	--theme-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+	@include desk_theme_tokens;
+	@include desk_theme_widget_tokens;
+
+	/* ── treatment: base ──────────────────────────────────────────────────── */
+
+	body {
+		background: var(--theme-bg);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	::selection {
+		background: var(--theme-accent-soft);
+		color: var(--theme-accent-ink);
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--theme-scrollbar-thumb);
+		border-radius: 999px;
+		border: 3px solid transparent;
+		background-clip: padding-box;
+
+		&:hover {
+			background: var(--theme-accent-line);
+			background-clip: padding-box;
+		}
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	/* ── treatment: the gradient navbar ───────────────────────────────────── */
+
+	.navbar {
+		background: var(--theme-navbar-bg);
+		border-bottom: none;
+		color: var(--theme-navbar-fg);
+		--icon-stroke: rgba(255, 255, 255, 0.92);
+
+		.navbar-brand,
+		.navbar-text,
+		.nav-link,
+		.navbar-nav > .nav-item > .nav-link {
+			color: var(--theme-navbar-fg);
+		}
+
+		.nav-link:hover,
+		.nav-link:focus {
+			color: var(--theme-navbar-fg);
+			opacity: 0.82;
+		}
+
+		/* bootstrap marks the notification bell .text-muted with !important */
+		.text-muted {
+			color: var(--theme-navbar-fg-muted) !important;
+		}
+
+		/* breadcrumbs sit on the gradient - frappe leaves them on --text-color and
+		   draws the separators with a hardcoded dark arrow, both unreadable here */
+		#navbar-breadcrumbs {
+			--right-arrow-svg: url("data: image/svg+xml;utf8, <svg width='6' height='8' viewBox='0 0 6 8' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1.25 7.5L4.75 4L1.25 0.5' stroke='%23ffffff' stroke-opacity='0.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+			--left-arrow-svg: url("data: image/svg+xml;utf8, <svg width='6' height='8' viewBox='0 0 6 8' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.5 9.5L4 6l3.5-3.5' stroke='%23ffffff' stroke-opacity='0.6' stroke-linecap='round' stroke-linejoin='round'></path></svg>");
+
+			a,
+			li.disabled a {
+				color: var(--theme-navbar-fg);
+			}
+
+			a:hover {
+				color: var(--theme-navbar-fg);
+				opacity: 0.82;
+			}
+		}
+
+		.vertical-bar {
+			border-right-color: rgba(255, 255, 255, 0.28);
+		}
+
+		/* menus opened from the navbar stay on a light surface */
+		.dropdown-menu {
+			color: var(--theme-text-2);
+			--icon-stroke: var(--theme-text-2);
+
+			.dropdown-item,
+			.dropdown-item .menu-item-label {
+				color: var(--theme-text-2);
+			}
+		}
+	}
+
+	/* frappe paints the theme-switcher preview strip with background-color,
+	   which cannot take a gradient - repaint it with the shorthand */
+	.background .navbar {
+		background: var(--theme-navbar-bg);
+	}
+
+	/* white pill search field, floating on the gradient */
+	.search-bar .awesomplete input {
+		background: var(--theme-surface-1);
+		border: 1px solid transparent;
+		border-radius: var(--border-radius-full);
+		color: var(--theme-text-1);
+		box-shadow: var(--theme-shadow-1);
+
+		&::placeholder {
+			color: var(--theme-text-3);
+		}
+
+		&:focus {
+			border-color: transparent;
+			box-shadow: var(--theme-shadow-2);
+		}
+	}
+
+	.search-bar svg {
+		stroke: var(--theme-text-3);
+	}
+
+	/* ── treatment: page head - magenta title ─────────────────────────────── */
+
+	.page-title .title-text,
+	.page-head-content .title-text {
+		color: var(--theme-accent);
+		font-weight: 700;
+	}
+
+	.page-title .sidebar-toggle-btn {
+		--icon-stroke: var(--theme-accent);
+	}
+
+	/* ── treatment: sidebar - solid magenta pill for the active workspace ─── */
+
+	.layout-side-section {
+		background: var(--theme-sidebar);
+	}
+
+	.standard-sidebar-label,
+	.sidebar-label {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--theme-text-3);
+	}
+
+	.standard-sidebar-item {
+		border-radius: var(--border-radius);
+		--icon-stroke: var(--theme-accent-ink);
+		transition: background 0.15s var(--theme-ease);
+
+		> a {
+			color: var(--theme-accent-ink);
+			font-weight: 500;
+		}
+
+		&:hover,
+		&:focus-within {
+			background-color: var(--theme-accent-soft);
+		}
+
+		&.selected {
+			background-color: var(--theme-accent);
+			--icon-stroke: #ffffff;
+
+			> a,
+			.sidebar-item-label {
+				color: #ffffff;
+				font-weight: 600;
+			}
+		}
+	}
+
+	/* ── treatment: cards and widgets ─────────────────────────────────────── */
+
+	.frappe-card,
+	.widget,
+	.layout-main-section.frappe-card {
+		background: var(--theme-surface-1);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-md);
+		box-shadow: var(--theme-shadow-1);
+	}
+
+	.widget-title,
+	.widget.links-widget-box .widget-head .widget-title,
+	.widget-head .widget-label .widget-title {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	/* workspace shortcuts read as magenta links; Reports & Masters stay dark */
+	.widget.shortcut-widget-box {
+		.widget-title {
+			color: var(--theme-accent) !important;
+		}
+
+		&:hover {
+			--icon-stroke: var(--theme-accent-ink);
+
+			.widget-title {
+				color: var(--theme-accent-ink) !important;
+			}
+		}
+	}
+
+	.widget.links-widget-box .link-item:hover {
+		background-color: var(--theme-accent-soft);
+		color: var(--theme-accent-ink);
+	}
+
+	/* ── treatment: buttons ───────────────────────────────────────────────── */
+
+	.btn {
+		border-radius: var(--border-radius);
+		font-weight: 500;
+	}
+
+	.btn-primary {
+		background-color: var(--theme-accent);
+		border-color: var(--theme-accent);
+		color: #ffffff;
+
+		&:hover,
+		&:focus,
+		&:active,
+		&:not(:disabled):not(.disabled):active {
+			background-color: var(--theme-accent-ink);
+			border-color: var(--theme-accent-ink);
+			color: #ffffff;
+		}
+	}
+
+	.btn-default,
+	.btn-secondary {
+		background-color: var(--theme-surface-1);
+		border: 1px solid var(--theme-hairline);
+		color: var(--theme-text-2);
+
+		&:hover {
+			background-color: var(--theme-surface-2);
+			border-color: var(--theme-hairline-strong);
+			color: var(--theme-text-1);
+		}
+	}
+
+	/* ── treatment: controls ──────────────────────────────────────────────── */
+
+	/* checkboxes and radios carry .input-with-feedback too - leave their 14px
+	   box, 4px radius and tick to frappe's own element styles */
+	.form-control:not([type="checkbox"]):not([type="radio"]),
+	.input-with-feedback:not([type="checkbox"]):not([type="radio"]) {
+		background-color: var(--theme-surface-3);
+		border: 1px solid transparent;
+		border-radius: var(--border-radius-sm);
+		color: var(--theme-text-1);
+
+		&:focus {
+			outline: none;
+			background-color: var(--theme-surface-1);
+			border-color: var(--theme-accent-line);
+			box-shadow: 0 0 0 3px var(--theme-accent-soft);
+		}
+	}
+
+	.control-label {
+		color: var(--theme-text-3);
+		font-weight: 500;
+	}
+
+	.section-head {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	/* ── treatment: lists, tables, reports ────────────────────────────────── */
+
+	.list-row-head {
+		background-color: var(--theme-surface-2);
+		border-bottom: 1px solid var(--theme-hairline);
+
+		.list-row-col span,
+		.list-subject {
+			color: var(--theme-text-3);
+			font-weight: 600;
+		}
+	}
+
+	.list-row-container {
+		border-bottom: 1px solid var(--theme-hairline-2);
+	}
+
+	.list-row:hover,
+	.list-row-container:hover {
+		background-color: var(--theme-accent-soft);
+	}
+
+	.dt-header .dt-cell,
+	.dt-row-header .dt-cell {
+		background-color: var(--theme-surface-2);
+		color: var(--theme-text-3);
+	}
+
+	.dt-row:hover,
+	.dt-cell--highlight {
+		background-color: var(--theme-accent-soft);
+	}
+
+	.table thead th,
+	table.table thead th {
+		background-color: var(--theme-surface-2);
+		color: var(--theme-text-3);
+		border-bottom-color: var(--theme-hairline);
+	}
+
+	/* ── treatment: tabs ──────────────────────────────────────────────────── */
+
+	.form-tabs-list .form-tabs .nav-link,
+	.nav-tabs .nav-link {
+		color: var(--theme-text-3);
+		border-bottom: 2px solid transparent;
+
+		&:hover {
+			color: var(--theme-accent-ink);
+		}
+
+		&.active {
+			color: var(--theme-accent);
+			border-bottom-color: var(--theme-accent);
+			font-weight: 600;
+		}
+	}
+
+	/* ── treatment: dropdowns ─────────────────────────────────────────────── */
+
+	.dropdown-menu {
+		background-color: var(--theme-surface-1);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-md);
+		box-shadow: var(--theme-shadow-3);
+	}
+
+	.dropdown-item:hover,
+	.dropdown-item:focus {
+		background-color: var(--theme-accent-soft);
+		color: var(--theme-accent-ink);
+	}
+
+	/* ── treatment: dialogs ───────────────────────────────────────────────── */
+
+	.modal-content {
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-lg);
+		box-shadow: var(--theme-shadow-pop);
+	}
+
+	.modal-header,
+	.modal-footer {
+		border-color: var(--theme-hairline);
+	}
+
+	.modal-title {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	/* ── treatment: badges, pills, indicators ─────────────────────────────── */
+
+	.indicator-pill {
+		border-radius: var(--border-radius-full);
+		font-weight: 500;
+	}
+
+	.badge {
+		border-radius: var(--border-radius-full);
+	}
+
+	/* ── treatment: notifications ─────────────────────────────────────────── */
+
+	.notification-item:hover,
+	.notifications-list .recent-item:hover {
+		background-color: var(--theme-accent-soft);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-theme="magenta-aurora"] * {
+		transition-duration: 0.01ms !important;
+	}
+}

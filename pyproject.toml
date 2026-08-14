@@ -1,0 +1,48 @@
+[project]
+name = "promantia_theme"
+authors = [
+    { name = "Promantia Business Solutions Pvt Ltd", email = "notifications@promantia.com"}
+]
+description = "Desk themes for Frappe: Tekton Blue, Horizon Calm, Magenta Aurora and Paper Ledger."
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = [
+    # "frappe~=15.0.0" # Installed and managed by bench.
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+# These dependencies are only installed when developer mode is enabled
+[tool.bench.dev-dependencies]
+# package_name = "~=1.1.0"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "F",
+    "E",
+    "W",
+    "I",
+    "UP",
+    "B",
+    "RUF",
+]
+ignore = [
+    "B904", # raise inside except without from
+    "E101", # indentation contains mixed spaces and tabs
+    "E501", # line too long
+    "F401", # "unused" imports
+    "W191", # indentation contains tabs
+]
+typing-modules = ["frappe.types.DF"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"
+docstring-code-format = true

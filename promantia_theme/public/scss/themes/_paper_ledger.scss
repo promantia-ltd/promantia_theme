@@ -1,0 +1,387 @@
+// Paper Ledger - stationery-toned theme: powder-blue chrome, cream data-entry surfaces,
+// ink-black primary actions and a teal marker for the active row.
+// Distinctive traits: every sidebar entry is a pale blue pill (teal when active), workspace
+// widgets sit tinted inside a white card, and all inputs read as ruled ledger paper.
+
+[data-theme="paper-ledger"] {
+	/* --- Stationery palette --- */
+
+	/* surfaces - grey page ground, white cards, cream for anything editable */
+	--theme-bg: #f2f2f2;
+	--theme-surface-1: #ffffff;
+	--theme-surface-2: #f8f9fb;
+	--theme-surface-3: #fdf8dd;
+	--theme-surface-hover: #f7f0c9;
+	--theme-sidebar: #ffffff;
+
+	/* powder-blue chrome: navbar, page head, widgets, sidebar pills, table headers */
+	--theme-chrome: #e8eef7;
+	--theme-chrome-strong: #d8e3f1;
+
+	/* teal marks the active workspace, mint marks a hovered row */
+	--theme-select: #bfe3e8;
+	--theme-select-soft: #dcf1f4;
+
+	/* ink for primary actions - kept separate from the accent */
+	--theme-ink: #171717;
+
+	/* hairlines carry a slate tint */
+	--theme-hairline: rgba(31, 45, 61, 0.1);
+	--theme-hairline-2: rgba(31, 45, 61, 0.06);
+	--theme-hairline-strong: rgba(31, 45, 61, 0.18);
+
+	/* text - slate down to soft grey */
+	--theme-text-1: #1f272e;
+	--theme-text-2: #3f4b57;
+	--theme-text-3: #6b7684;
+	--theme-text-4: #9aa4b0;
+
+	/* slate-blue accent for links, focus rings and info states */
+	--theme-accent: #3c6e9f;
+	--theme-accent-ink: #2f5880;
+	--theme-accent-bright: #4b86bd;
+	--theme-accent-soft: rgba(60, 110, 159, 0.12);
+	--theme-accent-line: rgba(60, 110, 159, 0.38);
+
+	/* semantics, muted to sit beside the pastel chrome */
+	--theme-green: #1f8b52;
+	--theme-green-soft: rgba(31, 139, 82, 0.12);
+	--theme-amber: #9a6a06;
+	--theme-amber-soft: rgba(154, 106, 6, 0.14);
+	--theme-red: #c4392c;
+	--theme-red-soft: rgba(196, 57, 44, 0.11);
+	--theme-violet: #6a53c4;
+	--theme-violet-soft: rgba(106, 83, 196, 0.11);
+
+	/* neutral ramp, cooled toward slate */
+	--theme-gray-50: #f8f9fb;
+	--theme-gray-100: #f1f3f7;
+	--theme-gray-200: #e6e9ef;
+	--theme-gray-300: #d8dde5;
+	--theme-gray-400: #bcc4cf;
+	--theme-gray-500: #9aa4b0;
+	--theme-gray-600: #6b7684;
+	--theme-gray-700: #3f4b57;
+	--theme-gray-800: #2b343d;
+	--theme-gray-900: #1f272e;
+
+	/* shadows - flat stationery, barely lifted */
+	--theme-shadow-1: 0 1px 2px rgba(31, 45, 61, 0.06);
+	--theme-shadow-2: 0 4px 14px rgba(31, 45, 61, 0.09);
+	--theme-shadow-3: 0 12px 32px rgba(31, 45, 61, 0.12);
+	--theme-shadow-pop: 0 20px 52px rgba(31, 45, 61, 0.18);
+
+	/* radii */
+	--theme-radius-tiny: 4px;
+	--theme-radius-sm: 6px;
+	--theme-radius-base: 8px;
+	--theme-radius-md: 10px;
+	--theme-radius-lg: 12px;
+	--theme-radius-xl: 16px;
+	--theme-radius-2xl: 20px;
+
+	/* chrome tokens consumed by the shared layer */
+	--theme-font-stack: "InterVariable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		"Roboto", "Helvetica Neue", sans-serif;
+	--theme-navbar-bg: var(--theme-chrome);
+	--theme-scrollbar-thumb: rgba(31, 45, 61, 0.2);
+	--theme-scrollbar-track: transparent;
+
+	--theme-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+	@include desk_theme_tokens;
+	@include desk_theme_widget_tokens;
+
+	/* --- Overrides on top of the shared mapping --- */
+
+	/* primary actions are ink, not the accent - the accent stays for links and focus */
+	--primary: var(--theme-ink);
+	--primary-color: var(--theme-ink);
+	--btn-primary: var(--theme-ink);
+	--border-primary: var(--theme-ink);
+
+	/* default buttons and the frappe "subtle" surfaces take the powder-blue chrome */
+	--btn-default-bg: var(--theme-chrome);
+	--btn-default-hover-bg: var(--theme-chrome-strong);
+	--subtle-fg: var(--theme-chrome);
+	--subtle-accent: var(--theme-chrome);
+	--sidebar-select-color: var(--theme-chrome-strong);
+	--fg-hover-color: var(--theme-chrome);
+	--input-disabled-bg: var(--theme-gray-200);
+	--disabled-control-bg: var(--theme-gray-200);
+
+	/* ── treatment: base ──────────────────────────────────────────────────── */
+
+	body {
+		background: var(--theme-bg);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	::selection {
+		background: var(--theme-select);
+		color: var(--theme-text-1);
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--theme-scrollbar-thumb);
+		border-radius: 999px;
+		border: 3px solid transparent;
+		background-clip: padding-box;
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	/* ── treatment: chrome bands ──────────────────────────────────────────── */
+
+	.navbar {
+		background: var(--theme-chrome);
+		border-bottom: 1px solid var(--theme-hairline);
+	}
+
+	.page-head {
+		background: var(--theme-chrome);
+	}
+
+	.page-title .title-text,
+	.page-head-content .title-text {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	/* ── treatment: sidebar - every entry a pill, teal when active ────────── */
+
+	.layout-side-section {
+		background: var(--theme-sidebar);
+	}
+
+	.standard-sidebar-label,
+	.sidebar-label {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--theme-text-3);
+	}
+
+	.standard-sidebar-item {
+		background-color: var(--theme-chrome);
+		border-radius: var(--border-radius);
+		margin-bottom: 4px;
+		transition: background 0.15s var(--theme-ease);
+
+		> a {
+			color: var(--theme-text-2);
+		}
+
+		&:hover,
+		&:focus-within {
+			background-color: var(--theme-chrome-strong);
+		}
+
+		&.selected {
+			background-color: var(--theme-select);
+
+			> a,
+			.sidebar-item-label {
+				color: var(--theme-text-1);
+				font-weight: 600;
+			}
+		}
+	}
+
+	/* ── treatment: cards stay white, workspace widgets take the chrome ───── */
+
+	.layout-main-section.frappe-card,
+	.frappe-card {
+		background-color: var(--theme-surface-1);
+	}
+
+	.widget {
+		background-color: var(--theme-chrome);
+	}
+
+	.widget.widget-shadow {
+		box-shadow: none;
+	}
+
+	.widget-title,
+	.widget-head .widget-label .widget-title {
+		color: var(--theme-text-1);
+	}
+
+	.widget.links-widget-box .link-item:hover {
+		background-color: var(--theme-select-soft);
+	}
+
+	/* ── treatment: lists, tables, reports ────────────────────────────────── */
+
+	.list-row-head {
+		background-color: var(--theme-chrome);
+
+		.list-row-col span,
+		.list-subject {
+			color: var(--theme-text-3);
+			font-weight: 600;
+		}
+	}
+
+	.list-row-container {
+		border-bottom: 1px solid var(--theme-hairline-2);
+	}
+
+	.list-row:hover,
+	.list-row-container:hover {
+		background-color: var(--theme-select-soft);
+	}
+
+	.dt-row:hover,
+	.dt-cell--highlight {
+		background-color: var(--theme-select-soft);
+	}
+
+	.table thead th,
+	table.table thead th {
+		background-color: var(--theme-chrome);
+		color: var(--theme-text-3);
+		border-bottom-color: var(--theme-hairline);
+	}
+
+	/* ── treatment: controls read as ruled ledger paper ───────────────────── */
+
+	/* checkboxes and radios carry .input-with-feedback too - leave their 14px
+	   box, 4px radius and tick to frappe's own element styles */
+	.form-control:not([type="checkbox"]):not([type="radio"]),
+	.input-with-feedback:not([type="checkbox"]):not([type="radio"]) {
+		background-color: var(--theme-surface-3);
+		border: 1px solid transparent;
+		border-radius: var(--border-radius-sm);
+		color: var(--theme-text-1);
+
+		&:focus {
+			outline: none;
+			background-color: var(--theme-surface-3);
+			border-color: var(--theme-accent-line);
+			box-shadow: 0 0 0 3px var(--theme-accent-soft);
+		}
+	}
+
+	/* the empty state of a child table is a data-entry surface too */
+	.grid-empty {
+		background-color: var(--theme-surface-3);
+		border-bottom-left-radius: var(--border-radius);
+		border-bottom-right-radius: var(--border-radius);
+	}
+
+	.control-label {
+		color: var(--theme-text-3);
+		font-weight: 500;
+	}
+
+	.section-head {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	/* ── treatment: buttons ───────────────────────────────────────────────── */
+
+	.btn {
+		border-radius: var(--border-radius);
+		font-weight: 500;
+	}
+
+	.btn-primary {
+		background-color: var(--theme-ink);
+		border-color: var(--theme-ink);
+		color: #ffffff;
+
+		&:hover,
+		&:focus,
+		&:active,
+		&:not(:disabled):not(.disabled):active {
+			background-color: #000000;
+			border-color: #000000;
+			color: #ffffff;
+		}
+	}
+
+	.btn-default,
+	.btn-secondary {
+		background-color: var(--theme-chrome);
+		border: 1px solid var(--theme-hairline);
+		color: var(--theme-text-2);
+
+		&:hover {
+			background-color: var(--theme-chrome-strong);
+			color: var(--theme-text-1);
+		}
+	}
+
+	/* ── treatment: tabs ──────────────────────────────────────────────────── */
+
+	.form-tabs-list .form-tabs .nav-link,
+	.nav-tabs .nav-link {
+		color: var(--theme-text-3);
+		border-bottom: 2px solid transparent;
+
+		&:hover {
+			color: var(--theme-text-1);
+		}
+
+		&.active {
+			color: var(--theme-text-1);
+			border-bottom-color: var(--theme-ink);
+			font-weight: 600;
+		}
+	}
+
+	/* ── treatment: dropdowns and dialogs ─────────────────────────────────── */
+
+	.dropdown-menu {
+		background-color: var(--theme-surface-1);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-md);
+		box-shadow: var(--theme-shadow-3);
+	}
+
+	.dropdown-item:hover,
+	.dropdown-item:focus {
+		background-color: var(--theme-select-soft);
+		color: var(--theme-text-1);
+	}
+
+	.modal-content {
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-lg);
+		box-shadow: var(--theme-shadow-pop);
+	}
+
+	.modal-header,
+	.modal-footer {
+		border-color: var(--theme-hairline);
+	}
+
+	.modal-title {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	/* ── treatment: badges and indicators ─────────────────────────────────── */
+
+	.indicator-pill {
+		border-radius: var(--border-radius-full);
+		font-weight: 500;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-theme="paper-ledger"] * {
+		transition-duration: 0.01ms !important;
+	}
+}

@@ -1,0 +1,212 @@
+// Shared design-token layer for this app's light desk themes.
+//
+// A theme declares the `--theme-*` contract below, then calls `@include desk_theme_tokens()`
+// to map it onto the CSS variables Frappe's desk actually reads. Only the values differ
+// between themes, so the ~130-line mapping lives here once.
+//
+// Contract a theme must declare before the include:
+//   surfaces  --theme-bg --theme-surface-1..3 --theme-surface-hover --theme-sidebar
+//   lines     --theme-hairline --theme-hairline-2 --theme-hairline-strong
+//   text      --theme-text-1..4
+//   accent    --theme-accent --theme-accent-ink --theme-accent-bright
+//             --theme-accent-soft --theme-accent-line
+//   semantics --theme-green|amber|red|violet and their -soft tints
+//   ramp      --theme-gray-50..--theme-gray-900
+//   depth     --theme-shadow-1..3 --theme-shadow-pop
+//   radii     --theme-radius-tiny|sm|base|md|lg|xl|2xl
+//   chrome    --theme-font-stack --theme-navbar-bg
+//             --theme-scrollbar-thumb --theme-scrollbar-track
+
+@mixin desk_theme_tokens() {
+	/* --- Neutral ramp --- */
+	--gray-50: var(--theme-gray-50);
+	--gray-100: var(--theme-gray-100);
+	--gray-200: var(--theme-gray-200);
+	--gray-300: var(--theme-gray-300);
+	--gray-400: var(--theme-gray-400);
+	--gray-500: var(--theme-gray-500);
+	--gray-600: var(--theme-gray-600);
+	--gray-700: var(--theme-gray-700);
+	--gray-800: var(--theme-gray-800);
+	--gray-900: var(--theme-gray-900);
+
+	/* --- Typography --- */
+	--font-stack: var(--theme-font-stack);
+	--heading-color: var(--theme-text-1);
+	--text-neutral: var(--theme-text-1);
+	--text-color: var(--theme-text-2);
+	--text-muted: var(--theme-text-3);
+	--text-light: var(--theme-text-4);
+
+	/* --- Radii --- */
+	--border-radius-tiny: var(--theme-radius-tiny);
+	--border-radius-sm: var(--theme-radius-sm);
+	--border-radius: var(--theme-radius-base);
+	--border-radius-md: var(--theme-radius-md);
+	--border-radius-lg: var(--theme-radius-lg);
+	--border-radius-xl: var(--theme-radius-xl);
+	--border-radius-2xl: var(--theme-radius-2xl);
+	--border-radius-full: 999px;
+
+	/* --- Depth --- */
+	--shadow-xs: var(--theme-shadow-1);
+	--shadow-sm: var(--theme-shadow-1);
+	--shadow-base: var(--theme-shadow-2);
+	--shadow-md: var(--theme-shadow-2);
+	--shadow-lg: var(--theme-shadow-3);
+	--shadow-xl: var(--theme-shadow-3);
+	--shadow-2xl: var(--theme-shadow-pop);
+	--card-shadow: var(--theme-shadow-1);
+	--modal-shadow: var(--theme-shadow-pop);
+	--btn-shadow: none;
+	--shadow-inset: inset 0px -1px 0px var(--theme-hairline);
+	--highlight-shadow: 0 0 0 4px var(--theme-accent-soft);
+	--focus-default: 0 0 0 4px var(--theme-accent-soft);
+	--focus-blue: 0 0 0 4px var(--theme-accent-soft);
+	--focus-green: 0 0 0 4px var(--theme-green-soft);
+	--focus-yellow: 0 0 0 4px var(--theme-amber-soft);
+	--focus-red: 0 0 0 4px var(--theme-red-soft);
+
+	/* --- Layout colors --- */
+	--bg-color: var(--theme-bg);
+	--fg-color: var(--theme-surface-1);
+	--card-bg: var(--theme-surface-1);
+	--navbar-bg: var(--theme-navbar-bg);
+	--fg-hover-color: var(--theme-surface-hover);
+	--subtle-accent: var(--theme-surface-2);
+	--subtle-fg: var(--theme-surface-3);
+	--control-bg: var(--theme-surface-3);
+	--control-bg-on-gray: var(--theme-surface-hover);
+	--disabled-control-bg: var(--theme-surface-2);
+	--disabled-text-color: var(--theme-text-4);
+	--awesomebar-focus-bg: var(--theme-surface-1);
+	--awesomplete-hover-bg: var(--theme-accent-soft);
+	--modal-bg: var(--theme-surface-1);
+	--toast-bg: var(--theme-surface-1);
+	--popover-bg: var(--theme-surface-1);
+	--input-disabled-bg: var(--theme-surface-3);
+	--placeholder-color: var(--theme-text-4);
+
+	/* --- Accent --- */
+	--primary: var(--theme-accent);
+	--primary-color: var(--theme-accent);
+	--brand-color: var(--theme-accent);
+	--btn-primary: var(--theme-accent);
+	--border-primary: var(--theme-accent);
+	--btn-default-bg: var(--theme-surface-1);
+	--btn-default-hover-bg: var(--theme-surface-3);
+	--checkbox-color: var(--theme-accent);
+	/* 2px, not the 4px used for text inputs - the checkbox is only 14px square */
+	--checkbox-focus-shadow: 0 0 0 2px var(--theme-accent-soft);
+	--checkbox-gradient: linear-gradient(
+		180deg,
+		var(--theme-accent-bright) -124.51%,
+		var(--theme-accent) 100%
+	);
+	--switch-bg: var(--theme-gray-300);
+
+	/* --- Borders --- */
+	--border-color: var(--theme-hairline);
+	--dark-border-color: var(--theme-hairline-strong);
+	--table-border-color: var(--theme-hairline-2);
+	--btn-group-border-color: var(--theme-hairline);
+	--highlight-color: var(--theme-accent-soft);
+	--yellow-highlight-color: var(--theme-amber-soft);
+	--sidebar-select-color: var(--theme-accent-soft);
+	--scrollbar-thumb-color: var(--theme-scrollbar-thumb);
+	--scrollbar-track-color: var(--theme-scrollbar-track);
+
+	/* --- Icons --- */
+	--icon-fill: transparent;
+	--icon-fill-bg: var(--theme-surface-1);
+	--icon-stroke: var(--theme-text-2);
+
+	/* --- Background / text pairs --- */
+	--bg-blue: var(--theme-accent-soft);
+	--bg-light-blue: var(--theme-accent-soft);
+	--bg-dark-blue: var(--theme-accent-line);
+	--bg-green: var(--theme-green-soft);
+	--bg-yellow: var(--theme-amber-soft);
+	--bg-orange: var(--theme-amber-soft);
+	--bg-red: var(--theme-red-soft);
+	--bg-gray: var(--theme-surface-3);
+	--bg-grey: var(--theme-surface-3);
+	--bg-light-gray: var(--theme-surface-3);
+	--bg-dark-gray: var(--theme-surface-hover);
+	--bg-darkgrey: var(--theme-surface-hover);
+	--bg-purple: var(--theme-violet-soft);
+	--bg-pink: var(--theme-violet-soft);
+	--bg-cyan: var(--theme-accent-soft);
+
+	--text-on-blue: var(--theme-accent-ink);
+	--text-on-light-blue: var(--theme-accent-ink);
+	--text-on-dark-blue: var(--theme-accent-ink);
+	--text-on-green: var(--theme-green);
+	--text-on-yellow: var(--theme-amber);
+	--text-on-orange: var(--theme-amber);
+	--text-on-red: var(--theme-red);
+	--text-on-gray: var(--theme-text-2);
+	--text-on-grey: var(--theme-text-2);
+	--text-on-light-gray: var(--theme-text-2);
+	--text-on-dark-gray: var(--theme-text-1);
+	--text-on-darkgrey: var(--theme-text-1);
+	--text-on-purple: var(--theme-violet);
+	--text-on-pink: var(--theme-violet);
+	--text-on-cyan: var(--theme-accent-ink);
+
+	/* --- Alerts --- */
+	--alert-text-danger: var(--theme-red);
+	--alert-text-warning: var(--theme-amber);
+	--alert-text-info: var(--theme-accent-ink);
+	--alert-text-success: var(--theme-green);
+	--alert-bg-danger: var(--theme-red-soft);
+	--alert-bg-warning: var(--theme-amber-soft);
+	--alert-bg-info: var(--theme-accent-soft);
+	--alert-bg-success: var(--theme-green-soft);
+	--error-bg: var(--theme-red-soft);
+	--error-border: var(--theme-red);
+
+	/* --- Diffs --- */
+	--diff-added: var(--theme-green-soft);
+	--diff-removed: var(--theme-red-soft);
+	--diff-changed: var(--theme-accent-soft);
+
+	color-scheme: light;
+}
+
+// Charts, heatmap, rating and skeleton all read their own variables off the theme tokens.
+@mixin desk_theme_widget_tokens() {
+	.chart-container {
+		--charts-label-color: var(--theme-text-3);
+		--charts-axis-line-color: var(--theme-hairline);
+		--charts-tooltip-title: var(--theme-text-3);
+		--charts-tooltip-label: var(--theme-text-3);
+		--charts-tooltip-value: var(--theme-text-1);
+		--charts-tooltip-bg: var(--theme-surface-1);
+		--charts-legend-label: var(--theme-text-3);
+	}
+
+	.heatmap-chart {
+		g > rect[fill="#ebedf0"] {
+			fill: var(--theme-surface-3);
+		}
+	}
+
+	.rating {
+		--star-fill: var(--theme-accent);
+
+		.star-hover {
+			--star-fill: var(--theme-accent-bright);
+		}
+	}
+
+	.skeleton {
+		--skeleton-bg: var(--theme-surface-3);
+	}
+
+	@each $color in $indicator-colors {
+		.indicator {
+			--indicator-dot-#{"" + $color}: var(--text-on-#{$color});
+		}
+	}
+}

@@ -1,0 +1,5 @@
+// Shared sass values used by every theme partial. Not a bundle - esbuild ignores partials.
+
+// mirrors the indicator colour list frappe iterates in its own theme stylesheets
+$indicator-colors: blue, light-blue, dark-blue, green, yellow, orange, red, gray, grey, darkgrey,
+	purple, pink, cyan;
