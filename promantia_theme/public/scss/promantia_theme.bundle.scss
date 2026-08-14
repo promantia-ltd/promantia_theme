@@ -1,0 +1,9 @@
+// Desk theme bundle. Loaded on every desk page via app_include_css in hooks.py.
+// Each partial scopes itself to [data-theme="<slug>"], matching a name in promantia_theme/theme_registry.py.
+
+@import "./theme_variables";
+@import "./theme_tokens";
+@import "./themes/tekton_blue";
+@import "./themes/horizon_calm";
+@import "./themes/magenta_aurora";
+@import "./themes/paper_ledger";

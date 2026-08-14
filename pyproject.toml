@@ -1,9 +1,9 @@
 [project]
-name = "horizon_theme"
+name = "promantia_theme"
 authors = [
     { name = "Promantia Business Solutions Pvt Ltd", email = "notifications@promantia.com"}
 ]
-description = "Desk themes for Frappe: the Tekton Blue theme plus the Horizon Calm theme derived from the Horizontal_Main design kit."
+description = "Desk themes for Frappe: Tekton Blue, Horizon Calm, Magenta Aurora and Paper Ledger."
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]

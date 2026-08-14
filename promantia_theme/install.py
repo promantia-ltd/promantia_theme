@@ -1,14 +1,12 @@
 import frappe
 from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
-from horizon_theme.theme_registry import get_allowed_theme_values, get_app_theme_values
+from promantia_theme.theme_registry import get_allowed_theme_values, get_app_theme_values
 
 DESK_THEME_PROPERTY_SETTER = "User-desk_theme-options"
 DEFAULT_DESK_THEME = "Light"
 
 # --- Install Hooks ---
-
-
 def after_install():
 	"""Makes this app's themes valid values of User.desk_theme right after installation."""
 	sync_desk_theme_options()
@@ -26,8 +24,6 @@ def before_uninstall():
 
 
 # --- Helpers ---
-
-
 def sync_desk_theme_options():
 	"""Widens the User.desk_theme select to the registered themes, keeping any options set elsewhere."""
 	options = merge_desk_theme_options()

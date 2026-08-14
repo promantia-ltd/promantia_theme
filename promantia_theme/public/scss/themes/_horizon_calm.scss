@@ -1,0 +1,338 @@
+// Horizon Calm - Frappe desk theme built from the Horizontal_Main "Calm Premium" design kit.
+// Tokens mirror Horizontal_Main/design-kit/theme.css; the treatment block mirrors its src/app.css:
+// soft surfaces, hairlines instead of heavy borders, layered shadows, one muted indigo accent.
+
+[data-theme="horizon-calm"] {
+	/* --- Calm Premium palette --- */
+
+	/* surfaces - soft, never stark */
+	--theme-bg: #f4f4f7;
+	--theme-surface-1: #ffffff;
+	--theme-surface-2: #fbfbfd;
+	--theme-surface-3: #f1f1f5;
+	--theme-surface-hover: #ececf1;
+	--theme-sidebar: #fbfbfd;
+
+	/* hairlines instead of heavy borders */
+	--theme-hairline: rgba(17, 17, 26, 0.08);
+	--theme-hairline-2: rgba(17, 17, 26, 0.05);
+	--theme-hairline-strong: rgba(17, 17, 26, 0.13);
+
+	/* text - near-black down to soft grey */
+	--theme-text-1: #1d1d1f;
+	--theme-text-2: #53535a;
+	--theme-text-3: #86868d;
+	--theme-text-4: #aeaeb6;
+
+	/* one muted indigo accent */
+	--theme-accent: #5b5fd6;
+	--theme-accent-ink: #4a4ec4;
+	--theme-accent-bright: #6e72e8;
+	--theme-accent-soft: rgba(91, 95, 214, 0.1);
+	--theme-accent-line: rgba(91, 95, 214, 0.32);
+
+	/* muted semantics, each with a soft tint */
+	--theme-green: #1f9d5b;
+	--theme-green-soft: rgba(31, 157, 91, 0.11);
+	--theme-amber: #a9690a;
+	--theme-amber-soft: rgba(184, 120, 16, 0.13);
+	--theme-red: #cf3b30;
+	--theme-red-soft: rgba(207, 59, 48, 0.1);
+	--theme-violet: #6d4fd0;
+	--theme-violet-soft: rgba(109, 79, 208, 0.1);
+
+	/* neutral ramp, re-tinted to the Calm Premium greys */
+	--theme-gray-50: #fbfbfd;
+	--theme-gray-100: #f4f4f7;
+	--theme-gray-200: #ececf1;
+	--theme-gray-300: #e0e0e8;
+	--theme-gray-400: #c9c9d3;
+	--theme-gray-500: #aeaeb6;
+	--theme-gray-600: #86868d;
+	--theme-gray-700: #53535a;
+	--theme-gray-800: #3a3a41;
+	--theme-gray-900: #1d1d1f;
+
+	/* layered shadows - depth comes from these, not borders */
+	--theme-shadow-1: 0 1px 2px rgba(18, 18, 40, 0.05);
+	--theme-shadow-2: 0 6px 22px rgba(18, 18, 45, 0.08);
+	--theme-shadow-3: 0 14px 44px rgba(18, 18, 45, 0.12);
+	--theme-shadow-pop: 0 24px 64px rgba(18, 18, 45, 0.18);
+
+	/* radii - soft, rounded */
+	--theme-radius-tiny: 6px;
+	--theme-radius-sm: 8px;
+	--theme-radius-base: 10px;
+	--theme-radius-md: 12px;
+	--theme-radius-lg: 14px;
+	--theme-radius-xl: 18px;
+	--theme-radius-2xl: 24px;
+
+	/* chrome */
+	--theme-font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+		"InterVariable", "Inter", system-ui, "Segoe UI", sans-serif;
+	--theme-navbar-bg: var(--theme-sidebar);
+	--theme-scrollbar-thumb: rgba(17, 17, 26, 0.14);
+	--theme-scrollbar-track: transparent;
+
+	/* motion */
+	--theme-ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--theme-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+	@include desk_theme_tokens;
+	@include desk_theme_widget_tokens;
+
+	/* ── treatment: base ──────────────────────────────────────────────────── */
+
+	body {
+		background: var(--theme-bg);
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+		letter-spacing: -0.01em;
+	}
+
+	::selection {
+		background: var(--theme-accent-soft);
+	}
+
+	/* refined scrollbar - thin, rounded, translucent */
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: rgba(17, 17, 26, 0.14);
+		border-radius: 999px;
+		border: 3px solid transparent;
+		background-clip: padding-box;
+
+		&:hover {
+			background: rgba(17, 17, 26, 0.22);
+			background-clip: padding-box;
+		}
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	/* ── treatment: navbar, translucent and blurred over the page ─────────── */
+
+	.navbar {
+		background: rgba(251, 251, 253, 0.86);
+		backdrop-filter: blur(8px);
+		border-bottom: 1px solid var(--theme-hairline);
+		box-shadow: none;
+	}
+
+	.navbar .navbar-brand {
+		font-weight: 640;
+		letter-spacing: -0.02em;
+		color: var(--theme-text-1);
+	}
+
+	.dropdown-menu {
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-lg);
+		box-shadow: var(--theme-shadow-3);
+	}
+
+	/* ── treatment: sidebar - hairline rule, accent-soft active pill ──────── */
+
+	.layout-side-section {
+		background: var(--theme-sidebar);
+	}
+
+	.sidebar-item-label,
+	.standard-sidebar-label,
+	.sidebar-label {
+		font-size: 10.5px;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--theme-text-4);
+	}
+
+	.standard-sidebar-item {
+		border-radius: var(--border-radius);
+		transition: background 0.15s var(--theme-ease), color 0.15s var(--theme-ease);
+
+		&:hover {
+			background: var(--theme-surface-3);
+			color: var(--theme-text-1);
+		}
+
+		&.selected {
+			background: var(--theme-accent-soft);
+			color: var(--theme-accent-ink);
+			font-weight: 560;
+		}
+	}
+
+	/* ── treatment: page shell ────────────────────────────────────────────── */
+
+	.page-head {
+		background: linear-gradient(var(--theme-bg), rgba(244, 244, 247, 0.86));
+		backdrop-filter: blur(8px);
+	}
+
+	.page-title .title-text,
+	.page-head-content .title-text {
+		font-weight: 640;
+		letter-spacing: -0.02em;
+		color: var(--theme-text-1);
+	}
+
+	/* ── treatment: cards lift on hover, depth from shadow not borders ────── */
+
+	.frappe-card,
+	.widget,
+	.layout-main-section.frappe-card {
+		background: var(--theme-surface-1);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-lg);
+		box-shadow: var(--theme-shadow-1);
+	}
+
+	.widget.widget-shadow,
+	.dashboard-widget-box {
+		transition: box-shadow 0.18s var(--theme-ease), transform 0.18s var(--theme-ease);
+
+		&:hover {
+			box-shadow: var(--theme-shadow-2);
+			transform: translateY(-1px);
+		}
+	}
+
+	/* ── treatment: list rows and report tables ───────────────────────────── */
+
+	.list-row-head {
+		background: var(--theme-surface-2);
+		border-bottom: 1px solid var(--theme-hairline);
+
+		.list-row-col span,
+		.list-subject {
+			font-size: 10.5px;
+			font-weight: 600;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: var(--theme-text-4);
+		}
+	}
+
+	.list-row-container {
+		border-bottom: 1px solid var(--theme-hairline-2);
+	}
+
+	.list-row:hover {
+		background: var(--theme-surface-2);
+	}
+
+	.dt-row:hover,
+	.dt-cell--highlight {
+		background: var(--theme-surface-2);
+	}
+
+	/* ── treatment: buttons ───────────────────────────────────────────────── */
+
+	.btn {
+		border-radius: var(--border-radius);
+		transition: filter 0.16s var(--theme-ease), transform 0.12s var(--theme-ease),
+			background 0.16s var(--theme-ease);
+
+		&:active {
+			transform: scale(0.97);
+		}
+	}
+
+	.btn-primary {
+		background: var(--theme-accent);
+		border-color: var(--theme-accent);
+		color: #ffffff;
+		font-weight: 560;
+
+		&:hover,
+		&:focus {
+			background: var(--theme-accent);
+			border-color: var(--theme-accent);
+			filter: brightness(1.05);
+		}
+	}
+
+	.btn-default,
+	.btn-secondary {
+		border: 1px solid var(--theme-hairline);
+		background: var(--theme-surface-1);
+		color: var(--theme-text-2);
+
+		&:hover {
+			border-color: var(--theme-hairline-strong);
+			background: var(--theme-surface-1);
+			color: var(--theme-text-1);
+		}
+	}
+
+	/* ── treatment: controls - soft focus glow, never a hard outline ──────── */
+
+	/* checkboxes and radios carry .input-with-feedback too - leave their 14px
+	   box, 4px radius and tick to frappe's own element styles */
+	.form-control:not([type="checkbox"]):not([type="radio"]),
+	.input-with-feedback:not([type="checkbox"]):not([type="radio"]),
+	.awesomplete > input {
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-sm);
+		background: var(--theme-surface-1);
+		transition: border-color 0.15s var(--theme-ease), box-shadow 0.15s var(--theme-ease);
+
+		&:focus {
+			outline: none;
+			border-color: var(--theme-accent-line);
+			box-shadow: 0 0 0 4px var(--theme-accent-soft);
+		}
+	}
+
+	.control-label {
+		font-size: 11.5px;
+		font-weight: 540;
+		color: var(--theme-text-3);
+	}
+
+	.section-head,
+	.form-section .section-head {
+		font-size: 10.5px;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--theme-text-4);
+	}
+
+	/* ── treatment: modals and popovers ───────────────────────────────────── */
+
+	.modal-content {
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-xl);
+		box-shadow: var(--theme-shadow-pop);
+	}
+
+	.modal-header,
+	.modal-footer {
+		border-color: var(--theme-hairline);
+	}
+
+	/* ── treatment: pills and indicators ──────────────────────────────────── */
+
+	.indicator-pill {
+		border-radius: var(--border-radius-full);
+		font-weight: 560;
+		letter-spacing: 0.01em;
+	}
+}
+
+// honour the reader's motion preference for the hover lifts and transitions above
+@media (prefers-reduced-motion: reduce) {
+	[data-theme="horizon-calm"] * {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
+}

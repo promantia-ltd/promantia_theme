@@ -1,7 +1,6 @@
 """Single source of truth for the desk themes this app makes selectable."""
 
 # --- Registry ---
-
 # Frappe's built-in themes, re-declared so overriding ThemeSwitcher.fetch_themes() keeps them selectable.
 STOCK_DESK_THEMES = (
 	{"name": "light", "label": "Frappe Light", "info": "Light Theme"},
@@ -25,12 +24,20 @@ APP_DESK_THEMES = (
 		"label": "Horizon Calm",
 		"info": "Soft light surfaces, hairline borders and a muted indigo accent",
 	},
+	{
+		"name": "magenta-aurora",
+		"label": "Magenta Aurora",
+		"info": "Vivid magenta accents under a plum-to-fuchsia gradient navbar",
+	},
+	{
+		"name": "paper-ledger",
+		"label": "Paper Ledger",
+		"info": "Powder-blue chrome, cream data-entry surfaces and ink-black actions",
+	},
 )
 
 
 # --- Accessors ---
-
-
 def get_desk_themes():
 	"""Returns every desk theme selectable while this app is installed, in display order."""
 	return [dict(theme) for theme in (*STOCK_DESK_THEMES, *APP_DESK_THEMES)]
