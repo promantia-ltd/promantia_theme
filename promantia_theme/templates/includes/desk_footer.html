@@ -1,0 +1,11 @@
+{# Desk footer for the Promantia Custom Theme. Rendered by promantia_theme.custom_theme and
+   mounted into the desk shell's own <footer> by public/js/custom_theme.js. Frappe's jinja
+   environment does not autoescape, so both texts are escaped here - they end up in innerHTML. #}
+<div class="promantia-desk-footer{% if sticky_footer %} sticky{% endif %}">
+	<div class="promantia-desk-footer-left">
+		{% if copyright_text %}<span>{{ copyright_text | e }}</span>{% endif %}
+	</div>
+	<div class="promantia-desk-footer-right">
+		{% if footer_powered_by %}<span>{{ footer_powered_by | e }}</span>{% endif %}
+	</div>
+</div>

@@ -18,6 +18,13 @@ app_include_css = ["promantia_theme.bundle.css"]
 
 extend_bootinfo = "promantia_theme.boot.extend_bootinfo"
 
+# Website
+# -------
+# Adds the Promantia Custom Theme login appearance to the login route's <head>. Doing it here
+# rather than through web_include_* keeps every other portal page free of this app's assets.
+
+update_website_context = "promantia_theme.custom_theme.update_website_context"
+
 # Overriding Methods
 # ------------------
 # frappe's own switch_theme only accepts Light/Dark/Automatic

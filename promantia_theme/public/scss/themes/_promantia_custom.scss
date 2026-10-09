@@ -1,0 +1,175 @@
+// Promantia Custom Theme - the only theme in this app whose values come from a doctype rather
+// than from this file. public/js/custom_theme.js writes the --ptc-* properties into a <style>
+// element scoped to this same selector, and removes it the moment another theme is picked.
+//
+// Every declaration below falls back to frappe's own variable for that element, so a field left
+// blank in Promantia Custom Theme leaves frappe's default appearance exactly as it was. Nothing
+// here redefines a frappe variable, which is what keeps the fallbacks honest: `--navbar-bg` still
+// holds frappe's value and can be read as the fallback for `--ptc-navbar-bg`.
+
+[data-theme="promantia-custom"] {
+	/* ── navbar ───────────────────────────────────────────────────────────── */
+
+	.navbar {
+		background-color: var(--ptc-navbar-bg, var(--navbar-bg));
+	}
+
+	.navbar,
+	.navbar-brand,
+	.navbar .nav-link,
+	.navbar .btn-reset.nav-link span,
+	#navbar-breadcrumbs li a,
+	#navbar-breadcrumbs li.disabled a {
+		color: var(--ptc-navbar-color, var(--text-color));
+	}
+
+	.navbar .icon use,
+	.navbar .es-icon use {
+		stroke: var(--ptc-navbar-color, var(--icon-stroke));
+	}
+
+	/* ── buttons ──────────────────────────────────────────────────────────── */
+
+	/* each hover falls back to the configured resting color before frappe's, so setting only a
+	   background does not leave the hover state reverting to frappe's default */
+	.btn.btn-primary {
+		background-color: var(--ptc-btn-primary-bg, var(--btn-primary));
+		color: var(--ptc-btn-primary-color, var(--neutral));
+
+		&:hover {
+			background-color: var(--ptc-btn-primary-hover-bg, var(--ptc-btn-primary-bg, var(--btn-primary)));
+			color: var(--ptc-btn-primary-hover-color, var(--ptc-btn-primary-color, var(--neutral)));
+		}
+	}
+
+	.btn.btn-default {
+		background-color: var(--ptc-btn-secondary-bg, var(--btn-default-bg));
+		color: var(--ptc-btn-secondary-color, var(--text-color));
+
+		&:hover {
+			background-color: var(--ptc-btn-secondary-hover-bg, var(--btn-default-hover-bg));
+			color: var(--ptc-btn-secondary-hover-color, var(--ptc-btn-secondary-color, var(--text-color)));
+		}
+	}
+
+	/* ── body and content area ────────────────────────────────────────────── */
+
+	body,
+	.page-head,
+	.content.page-container {
+		background-color: var(--ptc-body-bg, var(--bg-color));
+	}
+
+	.layout-main-section,
+	.frappe-card {
+		background-color: var(--ptc-content-bg, var(--card-bg));
+		color: var(--ptc-content-color, var(--text-color));
+	}
+
+	/* ── sidebar ──────────────────────────────────────────────────────────── */
+
+	/* frappe leaves the sidebar column transparent, so transparent is its default here */
+	.layout-side-section,
+	.desk-sidebar {
+		background-color: var(--ptc-sidebar-bg, transparent);
+	}
+
+	.standard-sidebar-label,
+	.standard-sidebar-item > a,
+	.sidebar-item-label,
+	.list-sidebar .sidebar-label {
+		color: var(--ptc-sidebar-color, var(--text-color));
+	}
+
+	/* ── inputs ───────────────────────────────────────────────────────────── */
+
+	/* frappe's inputs carry `border: none`, so the border color is drawn as a box-shadow ring -
+	   an unset ring is transparent and, unlike a real border, costs no layout */
+	.form-control {
+		background-color: var(--ptc-input-bg, var(--control-bg));
+		color: var(--ptc-input-color, var(--text-color));
+		box-shadow: 0 0 0 1px var(--ptc-input-border, transparent);
+	}
+
+	.control-label {
+		color: var(--ptc-input-label-color, var(--text-muted));
+	}
+
+	/* ── lists and tables ─────────────────────────────────────────────────── */
+
+	.list-row-head,
+	.table thead th,
+	table.table thead th {
+		background-color: var(--ptc-table-head-bg, var(--subtle-fg));
+		color: var(--ptc-table-head-color, var(--text-muted));
+	}
+
+	.list-row-head .list-row-col span,
+	.list-row-head .list-subject,
+	.list-row-head .level-item {
+		color: var(--ptc-table-head-color, var(--text-muted));
+	}
+
+	/* left below the specificity of frappe's own `.list-row:hover`, so hover still reads */
+	.list-row,
+	.table tbody td {
+		background-color: var(--ptc-table-body-bg, transparent);
+		color: var(--ptc-table-body-color, var(--text-color));
+	}
+
+	/* ── number cards ─────────────────────────────────────────────────────── */
+
+	.widget.number-widget-box {
+		background-color: var(--ptc-card-bg, var(--card-bg));
+		border-color: var(--ptc-card-border, var(--border-color));
+
+		.widget-title,
+		.widget-label,
+		.widget-content .number,
+		.widget-content .card-stats {
+			color: var(--ptc-card-color, var(--text-color));
+		}
+	}
+
+	/* ── desk footer ──────────────────────────────────────────────────────── */
+
+	/* the markup comes from templates/includes/desk_footer.html, mounted into the desk shell's
+	   own <footer> - it exists only while this theme is selected and a footer text is configured */
+	.promantia-desk-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: var(--margin-sm);
+		padding: var(--padding-sm) var(--padding-lg);
+		border-top: 1px solid var(--border-color);
+		background-color: var(--ptc-footer-bg, var(--subtle-accent));
+		color: var(--ptc-footer-color, var(--text-muted));
+		font-size: var(--text-sm);
+	}
+
+	.promantia-desk-footer.sticky {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+	}
+
+	/* ── configurable hides ───────────────────────────────────────────────── */
+
+	/* driven by classes rather than a display variable, so frappe's own responsive
+	   `d-none d-lg-block` on the help dropdown keeps working when the hide is off */
+	&.promantia-hide-help .navbar .dropdown-help {
+		display: none !important;
+	}
+
+	/* on frappe v15 the app switcher is the Apps entry of the navbar settings dropdown */
+	&.promantia-hide-app-switcher .dropdown-menu a.dropdown-item[href="/apps"] {
+		display: none !important;
+	}
+
+	&.promantia-has-sticky-footer .main-section {
+		padding-bottom: 56px;
+	}
+}
