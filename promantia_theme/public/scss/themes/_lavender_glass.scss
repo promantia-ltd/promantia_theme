@@ -1,0 +1,535 @@
+// Lavender Glass - a light glassmorphism desk theme.
+// Distinctive traits: a fixed pastel ground of lavender, periwinkle and blush glows; frosted
+// white panels (navbar, sidebar, main card, dialogs) with a bright rim and backdrop blur;
+// deep navy-violet text so the colour stays in the background and the content stays sober.
+//
+// The surface tokens stay opaque on purpose - frappe reuses them for sticky headers, grid
+// rows and popups that must not show content through. Translucency is applied only to the
+// named glass containers below.
+
+[data-theme="lavender-glass"] {
+	/* --- Glass palette --- */
+
+	/* surfaces - opaque pearl whites with a lavender cast */
+	--theme-bg: #ebe7f8;
+	--theme-surface-1: #fbfaff;
+	--theme-surface-2: #f5f3fd;
+	--theme-surface-3: #efebfb;
+	--theme-surface-hover: #e7e1fa;
+	--theme-sidebar: transparent;
+
+	/* glass - the translucent fills, rim and blur the frosted containers share */
+	--theme-glass: rgba(255, 255, 255, 0.5);
+	--theme-glass-strong: rgba(255, 255, 255, 0.72);
+	--theme-glass-soft: rgba(255, 255, 255, 0.34);
+	--theme-glass-rim: rgba(255, 255, 255, 0.75);
+	--theme-glass-blur: blur(22px) saturate(160%);
+
+	/* hairlines are violet-tinted so they still show on the white glass */
+	--theme-hairline: rgba(76, 60, 150, 0.12);
+	--theme-hairline-2: rgba(76, 60, 150, 0.07);
+	--theme-hairline-strong: rgba(76, 60, 150, 0.2);
+
+	/* text - deep navy-violet, never pure black */
+	--theme-text-1: #221d45;
+	--theme-text-2: #423d68;
+	--theme-text-3: #6e6994;
+	--theme-text-4: #9e99bd;
+
+	/* the violet accent */
+	--theme-accent: #7457e8;
+	--theme-accent-ink: #5a3fcf;
+	--theme-accent-bright: #9479f5;
+	--theme-accent-soft: rgba(116, 87, 232, 0.13);
+	--theme-accent-line: rgba(116, 87, 232, 0.4);
+
+	/* semantics, kept muted so they sit on pastel without shouting */
+	--theme-green: #1f8a63;
+	--theme-green-soft: rgba(31, 138, 99, 0.13);
+	--theme-amber: #a8670d;
+	--theme-amber-soft: rgba(212, 141, 34, 0.16);
+	--theme-red: #c8395a;
+	--theme-red-soft: rgba(200, 57, 90, 0.12);
+	--theme-violet: #a03fb8;
+	--theme-violet-soft: rgba(160, 63, 184, 0.12);
+
+	/* neutral ramp, tinted toward lavender */
+	--theme-gray-50: #f8f7fe;
+	--theme-gray-100: #f1eefc;
+	--theme-gray-200: #e4dff7;
+	--theme-gray-300: #cfc8ec;
+	--theme-gray-400: #ada6d2;
+	--theme-gray-500: #9e99bd;
+	--theme-gray-600: #6e6994;
+	--theme-gray-700: #423d68;
+	--theme-gray-800: #302b55;
+	--theme-gray-900: #221d45;
+
+	/* shadows are soft violet haze rather than grey */
+	--theme-shadow-1: 0 1px 3px rgba(70, 50, 160, 0.08);
+	--theme-shadow-2: 0 8px 28px rgba(70, 50, 160, 0.12);
+	--theme-shadow-3: 0 18px 48px rgba(70, 50, 160, 0.16);
+	--theme-shadow-pop: 0 28px 70px rgba(70, 50, 160, 0.22);
+
+	/* radii - soft and generous, like the glass tiles */
+	--theme-radius-tiny: 6px;
+	--theme-radius-sm: 8px;
+	--theme-radius-base: 10px;
+	--theme-radius-md: 14px;
+	--theme-radius-lg: 18px;
+	--theme-radius-xl: 22px;
+	--theme-radius-2xl: 28px;
+
+	/* chrome */
+	--theme-font-stack: "InterVariable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		"Roboto", "Helvetica Neue", sans-serif;
+	--theme-navbar-bg: rgba(255, 255, 255, 0.55);
+	--theme-scrollbar-thumb: rgba(116, 87, 232, 0.25);
+	--theme-scrollbar-track: transparent;
+
+	/* motion */
+	--theme-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+	@include desk_theme_tokens;
+	@include desk_theme_widget_tokens;
+
+	--kanban-column-bg: var(--theme-glass-soft);
+	--kanban-card-bg: var(--theme-surface-1);
+
+	/* ── treatment: base - the pastel ground ──────────────────────────────── */
+
+	body {
+		background-color: var(--theme-bg);
+		background-image: radial-gradient(48% 55% at 6% 12%, rgba(176, 154, 245, 0.55) 0%, transparent 70%),
+			radial-gradient(45% 50% at 96% 8%, rgba(150, 182, 245, 0.5) 0%, transparent 70%),
+			radial-gradient(50% 55% at 88% 92%, rgba(242, 176, 214, 0.5) 0%, transparent 70%),
+			radial-gradient(45% 50% at 14% 96%, rgba(247, 205, 190, 0.42) 0%, transparent 70%);
+		background-attachment: fixed;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.page-container,
+	.page-head {
+		background: transparent;
+	}
+
+	::selection {
+		background: var(--theme-accent-line);
+		color: var(--theme-text-1);
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--theme-scrollbar-thumb);
+		border-radius: 999px;
+		border: 3px solid transparent;
+		background-clip: padding-box;
+
+		&:hover {
+			background: var(--theme-accent-line);
+			background-clip: padding-box;
+		}
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	/* ── treatment: frosted navbar ────────────────────────────────────────── */
+
+	.navbar {
+		background: var(--theme-navbar-bg);
+		border-bottom: 1px solid var(--theme-glass-rim);
+		box-shadow: var(--theme-shadow-1);
+		backdrop-filter: var(--theme-glass-blur);
+		-webkit-backdrop-filter: var(--theme-glass-blur);
+	}
+
+	.search-bar .awesomplete input {
+		background: var(--theme-glass-strong);
+		border: 1px solid var(--theme-glass-rim);
+		border-radius: var(--border-radius-full);
+		color: var(--theme-text-1);
+		box-shadow: inset 0 1px 2px rgba(70, 50, 160, 0.06);
+
+		&::placeholder {
+			color: var(--theme-text-3);
+		}
+
+		&:focus {
+			background: var(--theme-surface-1);
+			border-color: var(--theme-accent-line);
+			box-shadow: 0 0 0 3px var(--theme-accent-soft);
+		}
+	}
+
+	.search-bar svg {
+		stroke: var(--theme-text-3);
+	}
+
+	/* ── treatment: page head ─────────────────────────────────────────────── */
+
+	.page-title .title-text,
+	.page-head-content .title-text {
+		color: var(--theme-text-1);
+		font-weight: 700;
+		letter-spacing: -0.01em;
+	}
+
+	.page-title .sidebar-toggle-btn {
+		--icon-stroke: var(--theme-text-2);
+	}
+
+	/* ── treatment: sidebar - white glass pill for the active item ────────── */
+
+	.layout-side-section {
+		background: var(--theme-sidebar);
+	}
+
+	.standard-sidebar-label,
+	.sidebar-label {
+		font-size: 10.5px;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--theme-text-3);
+	}
+
+	.standard-sidebar-item {
+		border-radius: var(--border-radius);
+		--icon-stroke: var(--theme-text-3);
+		transition: background 0.15s var(--theme-ease);
+
+		> a {
+			color: var(--theme-text-2);
+			font-weight: 500;
+		}
+
+		&:hover,
+		&:focus-within {
+			background-color: var(--theme-glass-soft);
+		}
+
+		&.selected {
+			background: var(--theme-glass-strong);
+			box-shadow: inset 0 0 0 1px var(--theme-glass-rim), var(--theme-shadow-1);
+			--icon-stroke: var(--theme-accent);
+
+			> a,
+			.sidebar-item-label {
+				color: var(--theme-accent-ink);
+				font-weight: 600;
+			}
+		}
+	}
+
+	/* ── treatment: frosted glass containers ──────────────────────────────── */
+
+	/* workspaces paint .layout-main-section without .frappe-card, so it is named on its own.
+	   No backdrop-filter here: it makes each card a stacking context, trapping link and
+	   select dropdowns under the comment footer that follows the main section. The ground
+	   is already a soft blur, so the frost reads the same without it. */
+	.layout-main-section,
+	.frappe-card,
+	.form-dashboard-section,
+	.report-wrapper {
+		background: var(--theme-glass);
+		border: 1px solid var(--theme-glass-rim);
+		border-radius: var(--border-radius-lg);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), var(--theme-shadow-2);
+	}
+
+	/* layers frappe fills with --fg-color inside the glass card - cleared so the frost shows */
+	.form-page,
+	.layout-main-section .page-form,
+	.frappe-list .result {
+		background: transparent;
+	}
+
+	/* frappe draws the form page as a second bordered card with this longer selector */
+	.std-form-layout > .form-layout > .form-page {
+		background-color: transparent;
+		border-color: transparent;
+	}
+
+	/* widgets already sit on a blurred card - a second blur adds cost, not depth */
+	.widget {
+		background: var(--theme-glass-soft);
+		border: 1px solid var(--theme-glass-rim);
+		border-radius: var(--border-radius-md);
+		box-shadow: var(--theme-shadow-1);
+		transition: background 0.2s var(--theme-ease), box-shadow 0.2s var(--theme-ease);
+
+		&:hover {
+			background: var(--theme-glass-strong);
+			box-shadow: var(--theme-shadow-2);
+		}
+	}
+
+	.widget-title,
+	.widget.links-widget-box .widget-head .widget-title,
+	.widget-head .widget-label .widget-title {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	.widget.number-widget-box .widget-content .number {
+		color: var(--theme-text-1);
+		font-weight: 700;
+	}
+
+	.widget.shortcut-widget-box:hover .widget-title {
+		color: var(--theme-accent-ink) !important;
+	}
+
+	.widget.links-widget-box .link-item:hover {
+		background-color: var(--theme-accent-soft);
+		color: var(--theme-accent-ink);
+	}
+
+	/* ── treatment: buttons ───────────────────────────────────────────────── */
+
+	.btn {
+		border-radius: var(--border-radius);
+		font-weight: 500;
+		transition: background 0.15s var(--theme-ease), box-shadow 0.15s var(--theme-ease);
+	}
+
+	.btn-primary {
+		background: linear-gradient(135deg, #8a6ff2 0%, #6f58e4 100%);
+		border: 1px solid rgba(255, 255, 255, 0.35);
+		color: #ffffff;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 14px rgba(116, 87, 232, 0.28);
+		--icon-stroke: #ffffff;
+
+		&:hover,
+		&:focus,
+		&:active,
+		&:not(:disabled):not(.disabled):active {
+			background: linear-gradient(135deg, #7b5ff0 0%, #5f47d8 100%);
+			border-color: rgba(255, 255, 255, 0.45);
+			color: #ffffff;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 6px 20px rgba(116, 87, 232, 0.36);
+		}
+	}
+
+	.btn-default,
+	.btn-secondary {
+		background: var(--theme-glass-strong);
+		border: 1px solid var(--theme-glass-rim);
+		color: var(--theme-text-2);
+		box-shadow: var(--theme-shadow-1);
+
+		&:hover {
+			background: var(--theme-surface-1);
+			border-color: var(--theme-hairline-strong);
+			color: var(--theme-text-1);
+		}
+	}
+
+	/* ── treatment: controls ──────────────────────────────────────────────── */
+
+	/* checkboxes and radios carry .input-with-feedback too - leave their 14px
+	   box, 4px radius and tick to frappe's own element styles */
+	.form-control:not([type="checkbox"]):not([type="radio"]),
+	.input-with-feedback:not([type="checkbox"]):not([type="radio"]) {
+		/* a violet hairline, not the white rim - empty fields must still read on white glass */
+		background-color: rgba(255, 255, 255, 0.62);
+		border: 1px solid var(--theme-hairline-strong);
+		border-radius: var(--border-radius-sm);
+		color: var(--theme-text-1);
+		box-shadow: inset 0 1px 2px rgba(70, 50, 160, 0.06);
+
+		&:focus {
+			outline: none;
+			background-color: var(--theme-surface-1);
+			border-color: var(--theme-accent-line);
+			box-shadow: 0 0 0 3px var(--theme-accent-soft);
+		}
+	}
+
+	/* the browser paints a select's open list from the select's own fill, so a
+	   translucent select gets an opaque one and its options are set explicitly */
+	select.form-control,
+	select.input-with-feedback,
+	select {
+		background-color: var(--theme-surface-1) !important;
+
+		option,
+		optgroup {
+			background-color: var(--theme-surface-1);
+			color: var(--theme-text-1);
+		}
+
+		option:checked {
+			background-color: var(--theme-surface-hover);
+		}
+
+		option:disabled {
+			color: var(--theme-text-4);
+		}
+	}
+
+	.control-label {
+		color: var(--theme-text-3);
+		font-weight: 500;
+	}
+
+	.section-head {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	.form-section {
+		border-color: var(--theme-hairline-2);
+	}
+
+	/* ── treatment: lists, tables, reports ────────────────────────────────── */
+
+	/* a site script pins this header with its own !important fill; it must stay
+	   opaque because rows scroll underneath it */
+	.list-row-head {
+		background-color: var(--theme-surface-2) !important;
+		box-shadow: 0 2px 8px rgba(70, 50, 160, 0.08) !important;
+		border-bottom: 1px solid var(--theme-hairline);
+
+		.list-row-col span,
+		.list-subject {
+			color: var(--theme-text-3);
+			font-weight: 600;
+		}
+	}
+
+	.list-row-container {
+		border-bottom: 1px solid var(--theme-hairline-2);
+	}
+
+	.list-row:hover,
+	.list-row-container:hover {
+		background-color: rgba(255, 255, 255, 0.55);
+	}
+
+	.dt-header .dt-cell,
+	.dt-row-header .dt-cell {
+		background-color: var(--theme-surface-2);
+		color: var(--theme-text-3);
+	}
+
+	.dt-row:hover,
+	.dt-cell--highlight {
+		background-color: var(--theme-accent-soft);
+	}
+
+	.table thead th,
+	table.table thead th {
+		background-color: var(--theme-surface-2);
+		color: var(--theme-text-3);
+		border-bottom-color: var(--theme-hairline);
+	}
+
+	/* ── treatment: tabs ──────────────────────────────────────────────────── */
+
+	/* the form tab bar is sticky - form content scrolls under it, so it needs a near-opaque
+	   frosted fill rather than the card's see-through glass */
+	.form-tabs-list {
+		background: rgba(250, 248, 255, 0.96);
+		border-bottom: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+		backdrop-filter: var(--theme-glass-blur);
+		-webkit-backdrop-filter: var(--theme-glass-blur);
+	}
+
+	.form-tabs-list .form-tabs .nav-link,
+	.nav-tabs .nav-link {
+		background: transparent;
+		color: var(--theme-text-3);
+		border-bottom: 2px solid transparent;
+
+		&:hover {
+			color: var(--theme-text-1);
+		}
+
+		&.active {
+			color: var(--theme-accent-ink);
+			border-bottom-color: var(--theme-accent);
+			font-weight: 600;
+		}
+	}
+
+	/* ── treatment: dropdowns, popovers - near-opaque glass for legibility ── */
+
+	.dropdown-menu,
+	.awesomplete > ul,
+	.popover {
+		background: rgba(251, 250, 255, 0.97);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-md);
+		box-shadow: var(--theme-shadow-3);
+		backdrop-filter: var(--theme-glass-blur);
+		-webkit-backdrop-filter: var(--theme-glass-blur);
+	}
+
+	.dropdown-item {
+		color: var(--theme-text-2);
+
+		&:hover,
+		&:focus {
+			background-color: var(--theme-accent-soft);
+			color: var(--theme-accent-ink);
+		}
+	}
+
+	/* ── treatment: dialogs ───────────────────────────────────────────────── */
+
+	.modal-content {
+		background: rgba(251, 250, 255, 0.86);
+		border: 1px solid var(--theme-glass-rim);
+		border-radius: var(--border-radius-xl);
+		box-shadow: inset 0 1px 0 #ffffff, var(--theme-shadow-pop);
+		backdrop-filter: var(--theme-glass-blur);
+		-webkit-backdrop-filter: var(--theme-glass-blur);
+	}
+
+	.modal-header,
+	.modal-footer {
+		border-color: var(--theme-hairline);
+	}
+
+	.modal-title {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	.modal-backdrop.show {
+		background-color: #3a2f7a;
+		opacity: 0.25;
+	}
+
+	/* ── treatment: badges, pills, indicators ─────────────────────────────── */
+
+	.indicator-pill {
+		border-radius: var(--border-radius-full);
+		font-weight: 500;
+	}
+
+	.badge {
+		border-radius: var(--border-radius-full);
+	}
+
+	/* ── treatment: notifications ─────────────────────────────────────────── */
+
+	.notification-item:hover,
+	.notifications-list .recent-item:hover {
+		background-color: var(--theme-accent-soft);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-theme="lavender-glass"] * {
+		transition-duration: 0.01ms !important;
+	}
+}

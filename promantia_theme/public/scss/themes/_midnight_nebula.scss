@@ -1,0 +1,567 @@
+// Midnight Nebula - a dark, glassy desk theme on a near-black indigo ground.
+// Distinctive traits: violet and mint aurora glows behind the page, frosted-glass cards with a
+// lit top edge, a translucent blurred navbar, silver-gradient page titles, and silver-lavender
+// pill primary buttons with dark ink.
+
+[data-theme="midnight-nebula"] {
+	/* --- Nebula palette --- */
+
+	/* surfaces - near-black indigo, lifted in small violet-tinted steps */
+	--theme-bg: #09081a;
+	--theme-surface-1: #14132a;
+	--theme-surface-2: #181730;
+	--theme-surface-3: #1f1d3a;
+	--theme-surface-hover: #26244a;
+	--theme-sidebar: transparent;
+
+	/* glass - the translucent fills and lit edge every card and the navbar share */
+	--theme-glass: linear-gradient(180deg, rgba(42, 40, 78, 0.62) 0%, rgba(20, 19, 42, 0.78) 100%);
+	--theme-glass-flat: rgba(20, 19, 42, 0.72);
+	--theme-glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+	/* hairlines are faint white, so they read as glass edges rather than borders */
+	--theme-hairline: rgba(255, 255, 255, 0.08);
+	--theme-hairline-2: rgba(255, 255, 255, 0.05);
+	--theme-hairline-strong: rgba(255, 255, 255, 0.16);
+
+	/* text - cool off-white fading to a dusty lavender */
+	--theme-text-1: #eeedf7;
+	--theme-text-2: #c6c4da;
+	--theme-text-3: #8f8ca9;
+	--theme-text-4: #615e7c;
+
+	/* the violet accent */
+	--theme-accent: #8b7bff;
+	--theme-accent-ink: #b3a8ff;
+	--theme-accent-bright: #a99dff;
+	--theme-accent-soft: rgba(139, 123, 255, 0.16);
+	--theme-accent-line: rgba(139, 123, 255, 0.45);
+
+	/* the mint glow paired with the violet */
+	--theme-mint: #5ce0a6;
+
+	/* silver-lavender, the fill of the primary pill buttons */
+	--theme-silver: linear-gradient(180deg, #f2f1fa 0%, #c9c6dd 100%);
+	--theme-silver-hover: linear-gradient(180deg, #ffffff 0%, #d8d5ea 100%);
+	--theme-silver-ink: #15132b;
+
+	/* semantics, brightened so they hold up on the dark ground */
+	--theme-green: #5ce0a6;
+	--theme-green-soft: rgba(92, 224, 166, 0.14);
+	--theme-amber: #f2c46b;
+	--theme-amber-soft: rgba(242, 196, 107, 0.14);
+	--theme-red: #ff7a8a;
+	--theme-red-soft: rgba(255, 122, 138, 0.14);
+	--theme-violet: #c3a6ff;
+	--theme-violet-soft: rgba(195, 166, 255, 0.15);
+
+	/* neutral ramp, light-to-dark like frappe's so its gray-N references keep their meaning */
+	--theme-gray-50: #f4f3fb;
+	--theme-gray-100: #e2e0ef;
+	--theme-gray-200: #c6c4da;
+	--theme-gray-300: #a5a2bf;
+	--theme-gray-400: #8f8ca9;
+	--theme-gray-500: #615e7c;
+	--theme-gray-600: #3d3a5c;
+	--theme-gray-700: #26244a;
+	--theme-gray-800: #1a1934;
+	--theme-gray-900: #0e0d22;
+
+	/* shadows go deep black, with a violet bloom on the floating layers */
+	--theme-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--theme-shadow-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+	--theme-shadow-3: 0 16px 44px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.04);
+	--theme-shadow-pop: 0 28px 70px rgba(0, 0, 0, 0.6), 0 0 60px rgba(139, 123, 255, 0.12);
+
+	/* radii - generous, matching the rounded glass tiles */
+	--theme-radius-tiny: 5px;
+	--theme-radius-sm: 7px;
+	--theme-radius-base: 9px;
+	--theme-radius-md: 12px;
+	--theme-radius-lg: 14px;
+	--theme-radius-xl: 18px;
+	--theme-radius-2xl: 24px;
+
+	/* chrome */
+	--theme-font-stack: "Manrope", "InterVariable", "Inter", -apple-system, BlinkMacSystemFont,
+		"Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+	--theme-navbar-bg: rgba(14, 13, 34, 0.72);
+	--theme-scrollbar-thumb: rgba(139, 123, 255, 0.28);
+	--theme-scrollbar-track: transparent;
+
+	/* motion */
+	--theme-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+	@include desk_theme_tokens;
+	@include desk_theme_widget_tokens;
+
+	/* ── dark-mode variables the shared token layer does not cover ────────── */
+
+	--neutral: var(--neutral-black);
+	--invert-neutral: var(--neutral-white);
+	--text-dark: var(--theme-gray-900);
+	--timeline-badge-color: var(--theme-text-3);
+	--timeline-badge-bg: var(--theme-surface-2);
+	--date-active-text: var(--theme-silver-ink);
+	--date-active-bg: var(--theme-accent-bright);
+	--date-range-bg: var(--theme-accent-soft);
+	--switch-bg: var(--theme-gray-600);
+
+	--kanban-column-bg: var(--theme-surface-1);
+	--kanban-card-bg: var(--theme-surface-3);
+	--kanban-new-card-bg: var(--theme-surface-2);
+	--kanban-new-card-hover-bg: var(--theme-surface-hover);
+
+	--avatar-frame-color: var(--theme-text-2);
+	--avatar-frame-bg: var(--theme-surface-3);
+	--avatar-frame-border: var(--theme-hairline);
+
+	color-scheme: dark;
+
+	/* ── treatment: base - aurora glows behind the page ───────────────────── */
+
+	body {
+		background-color: var(--theme-bg);
+		background-image: radial-gradient(
+				60% 45% at 12% 100%,
+				rgba(92, 224, 166, 0.1) 0%,
+				transparent 70%
+			),
+			radial-gradient(55% 45% at 88% 100%, rgba(139, 123, 255, 0.16) 0%, transparent 70%),
+			radial-gradient(50% 35% at 50% 0%, rgba(99, 86, 214, 0.14) 0%, transparent 75%);
+		background-attachment: fixed;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	::selection {
+		background: var(--theme-accent-line);
+		color: #ffffff;
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--theme-scrollbar-thumb);
+		border-radius: 999px;
+		border: 3px solid transparent;
+		background-clip: padding-box;
+
+		&:hover {
+			background: var(--theme-accent-line);
+			background-clip: padding-box;
+		}
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	/* ── treatment: translucent navbar ────────────────────────────────────── */
+
+	.navbar {
+		background: var(--theme-navbar-bg);
+		border-bottom: 1px solid var(--theme-hairline);
+		backdrop-filter: blur(18px) saturate(140%);
+		-webkit-backdrop-filter: blur(18px) saturate(140%);
+	}
+
+	.search-bar .awesomplete input {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-full);
+		color: var(--theme-text-1);
+
+		&::placeholder {
+			color: var(--theme-text-3);
+		}
+
+		&:focus {
+			background: rgba(255, 255, 255, 0.08);
+			border-color: var(--theme-accent-line);
+			box-shadow: 0 0 0 3px var(--theme-accent-soft);
+		}
+	}
+
+	.search-bar svg {
+		stroke: var(--theme-text-3);
+	}
+
+	/* ── treatment: page head - silver gradient title ─────────────────────── */
+
+	.page-head {
+		background: transparent;
+	}
+
+	.page-title .title-text,
+	.page-head-content .title-text {
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		background: linear-gradient(180deg, #ffffff 0%, #b6b3cc 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	.page-title .sidebar-toggle-btn {
+		--icon-stroke: var(--theme-text-2);
+	}
+
+	/* ── treatment: sidebar - glass pill with a violet edge for the active item */
+
+	.layout-side-section {
+		background: var(--theme-sidebar);
+	}
+
+	.standard-sidebar-label,
+	.sidebar-label {
+		font-size: 10.5px;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--theme-text-4);
+	}
+
+	.standard-sidebar-item {
+		border-radius: var(--border-radius);
+		--icon-stroke: var(--theme-text-3);
+		transition: background 0.15s var(--theme-ease);
+
+		> a {
+			color: var(--theme-text-2);
+			font-weight: 500;
+		}
+
+		&:hover,
+		&:focus-within {
+			background-color: rgba(255, 255, 255, 0.05);
+		}
+
+		&.selected {
+			background: linear-gradient(90deg, rgba(139, 123, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 100%);
+			box-shadow: inset 2px 0 0 var(--theme-accent), var(--theme-glass-edge);
+			--icon-stroke: var(--theme-accent-ink);
+
+			> a,
+			.sidebar-item-label {
+				color: var(--theme-text-1);
+				font-weight: 600;
+			}
+		}
+	}
+
+	/* ── treatment: frosted-glass cards and widgets ───────────────────────── */
+
+	.frappe-card,
+	.widget,
+	.layout-main-section.frappe-card,
+	.form-dashboard-section,
+	.report-wrapper {
+		background: var(--theme-glass);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-lg);
+		box-shadow: var(--theme-glass-edge), var(--theme-shadow-2);
+	}
+
+	.widget {
+		transition: border-color 0.2s var(--theme-ease), box-shadow 0.2s var(--theme-ease);
+
+		&:hover {
+			border-color: var(--theme-hairline-strong);
+			box-shadow: var(--theme-glass-edge), var(--theme-shadow-2),
+				0 0 32px rgba(139, 123, 255, 0.1);
+		}
+	}
+
+	.widget-title,
+	.widget.links-widget-box .widget-head .widget-title,
+	.widget-head .widget-label .widget-title {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	.widget.number-widget-box .widget-content .number {
+		color: var(--theme-text-1);
+		font-weight: 700;
+	}
+
+	.widget.shortcut-widget-box:hover .widget-title {
+		color: var(--theme-accent-ink) !important;
+	}
+
+	.widget.links-widget-box .link-item:hover {
+		background-color: rgba(255, 255, 255, 0.05);
+		color: var(--theme-text-1);
+	}
+
+	/* ── treatment: buttons - silver pill primary ─────────────────────────── */
+
+	.btn {
+		border-radius: var(--border-radius);
+		font-weight: 500;
+		transition: background 0.15s var(--theme-ease), box-shadow 0.15s var(--theme-ease);
+	}
+
+	.btn-primary {
+		background: var(--theme-silver);
+		border: 1px solid rgba(255, 255, 255, 0.6);
+		color: var(--theme-silver-ink);
+		font-weight: 600;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 18px rgba(185, 178, 230, 0.18);
+		--icon-stroke: var(--theme-silver-ink);
+
+		&:hover,
+		&:focus,
+		&:active,
+		&:not(:disabled):not(.disabled):active {
+			background: var(--theme-silver-hover);
+			border-color: #ffffff;
+			color: var(--theme-silver-ink);
+			box-shadow: inset 0 1px 0 #ffffff, 0 6px 26px rgba(185, 178, 230, 0.3);
+		}
+
+		&:disabled,
+		&.disabled {
+			opacity: 0.55;
+		}
+	}
+
+	.btn-default,
+	.btn-secondary,
+	.frappe-card .btn-default {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid var(--theme-hairline);
+		color: var(--theme-text-2);
+		box-shadow: var(--theme-glass-edge);
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.09);
+			border-color: var(--theme-hairline-strong);
+			color: var(--theme-text-1);
+		}
+	}
+
+	/* ── treatment: controls ──────────────────────────────────────────────── */
+
+	/* checkboxes and radios carry .input-with-feedback too - leave their 14px
+	   box, 4px radius and tick to frappe's own element styles */
+	.form-control:not([type="checkbox"]):not([type="radio"]),
+	.input-with-feedback:not([type="checkbox"]):not([type="radio"]) {
+		background-color: rgba(255, 255, 255, 0.04);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-sm);
+		color: var(--theme-text-1);
+
+		&:focus {
+			outline: none;
+			background-color: rgba(255, 255, 255, 0.07);
+			border-color: var(--theme-accent-line);
+			box-shadow: 0 0 0 3px var(--theme-accent-soft);
+		}
+	}
+
+	/* the browser paints a select's open list from the select's own fill - a
+	   translucent one falls back to a white list under light text, so selects
+	   and their options get opaque surfaces instead */
+	select.form-control,
+	select.input-with-feedback,
+	select {
+		background-color: var(--theme-surface-2) !important;
+		color-scheme: dark;
+
+		&:focus {
+			background-color: var(--theme-surface-3) !important;
+		}
+
+		option,
+		optgroup {
+			background-color: var(--theme-surface-1);
+			color: var(--theme-text-1);
+		}
+
+		option:checked {
+			background-color: var(--theme-surface-hover);
+			color: #ffffff;
+		}
+
+		option:disabled {
+			color: var(--theme-text-4);
+		}
+	}
+
+	.control-label {
+		color: var(--theme-text-3);
+		font-weight: 500;
+	}
+
+	.section-head {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	.form-section,
+	.form-dashboard-section {
+		border-color: var(--theme-hairline-2);
+	}
+
+	/* grid rows being edited sit one step darker than the glass around them */
+	.grid-body .editable-row {
+		--control-bg: var(--theme-surface-1);
+		--input-disabled-bg: var(--theme-surface-2);
+	}
+
+	/* ── treatment: lists, tables, reports ────────────────────────────────── */
+
+	/* a site script pins this header with a light !important fill; it must stay
+	   opaque because rows scroll underneath it */
+	.list-row-head {
+		background-color: var(--theme-surface-2) !important;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+		border-bottom: 1px solid var(--theme-hairline);
+
+		.list-row-col span,
+		.list-subject {
+			color: var(--theme-text-3);
+			font-weight: 600;
+		}
+	}
+
+	.list-row-container {
+		border-bottom: 1px solid var(--theme-hairline-2);
+	}
+
+	.list-row:hover,
+	.list-row-container:hover {
+		background-color: rgba(255, 255, 255, 0.04);
+	}
+
+	.dt-header .dt-cell,
+	.dt-row-header .dt-cell {
+		background-color: var(--theme-surface-2);
+		color: var(--theme-text-3);
+	}
+
+	.dt-cell {
+		background-color: transparent;
+		color: var(--theme-text-2);
+	}
+
+	.dt-row:hover,
+	.dt-cell--highlight {
+		background-color: var(--theme-accent-soft);
+	}
+
+	.table thead th,
+	table.table thead th {
+		background-color: var(--theme-surface-2);
+		color: var(--theme-text-3);
+		border-bottom-color: var(--theme-hairline);
+	}
+
+	/* ── treatment: tabs - mint underline, echoing the aurora ─────────────── */
+
+	.form-tabs-list .form-tabs .nav-link,
+	.nav-tabs .nav-link {
+		color: var(--theme-text-3);
+		border-bottom: 2px solid transparent;
+
+		&:hover {
+			color: var(--theme-text-1);
+		}
+
+		&.active {
+			color: var(--theme-text-1);
+			border-bottom-color: var(--theme-mint);
+			font-weight: 600;
+		}
+	}
+
+	/* ── treatment: dropdowns, popovers ───────────────────────────────────── */
+
+	.dropdown-menu,
+	.awesomplete > ul,
+	.popover {
+		background: rgba(22, 21, 46, 0.94);
+		border: 1px solid var(--theme-hairline);
+		border-radius: var(--border-radius-md);
+		box-shadow: var(--theme-shadow-3);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+	}
+
+	.dropdown-item {
+		color: var(--theme-text-2);
+
+		&:hover,
+		&:focus {
+			background-color: var(--theme-accent-soft);
+			color: var(--theme-text-1);
+		}
+	}
+
+	/* ── treatment: dialogs ───────────────────────────────────────────────── */
+
+	.modal,
+	.form-in-grid {
+		--control-bg: rgba(255, 255, 255, 0.04);
+		--border-color: var(--theme-hairline);
+	}
+
+	.modal-content {
+		background: linear-gradient(180deg, #1c1a38 0%, #121127 100%);
+		border: 1px solid var(--theme-hairline-strong);
+		border-radius: var(--border-radius-xl);
+		box-shadow: var(--theme-glass-edge), var(--theme-shadow-pop);
+	}
+
+	.modal-header,
+	.modal-footer {
+		border-color: var(--theme-hairline);
+	}
+
+	.modal-title {
+		color: var(--theme-text-1);
+		font-weight: 600;
+	}
+
+	.modal-backdrop.show {
+		opacity: 0.7;
+	}
+
+	/* ── treatment: badges, pills, indicators ─────────────────────────────── */
+
+	.indicator-pill {
+		border-radius: var(--border-radius-full);
+		font-weight: 500;
+	}
+
+	.badge {
+		border-radius: var(--border-radius-full);
+	}
+
+	.tag-pill {
+		background-color: var(--theme-surface-3);
+	}
+
+	/* ── treatment: notifications ─────────────────────────────────────────── */
+
+	.notification-item:hover,
+	.notifications-list .recent-item:hover {
+		background-color: rgba(255, 255, 255, 0.04);
+	}
+
+	/* ── treatment: content that must stay on paper ───────────────────────── */
+
+	.print-format {
+		--text-color: #1f272e;
+		--border-color: #ededed;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-theme="midnight-nebula"] * {
+		transition-duration: 0.01ms !important;
+	}
+}

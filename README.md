@@ -1,7 +1,7 @@
 # Promantia Theme
 
-Desk themes for Frappe v15. Adds five themes to the desk's **Switch Theme** dialog alongside the
-stock Frappe Light / Timeless Night / Automatic — four fixed stylesheets and one a System Manager
+Desk themes for Frappe v15. Adds seven themes to the desk's **Switch Theme** dialog alongside the
+stock Frappe Light / Timeless Night / Automatic — six fixed stylesheets and one a System Manager
 configures from a doctype:
 
 | Theme | Slug | Description |
@@ -10,6 +10,8 @@ configures from a doctype:
 | Horizon Calm | `horizon-calm` | Light theme built from the `Horizontal_Main` "Calm Premium" design kit — soft surfaces, hairline borders, layered shadows and one muted indigo accent. |
 | Magenta Aurora | `magenta-aurora` | Vivid fuchsia brand theme — a plum-to-magenta gradient navbar with a white pill search field, a magenta page title, and solid-magenta active/selected fills on a near-white lavender ground. |
 | Paper Ledger | `paper-ledger` | Stationery-toned theme — powder-blue chrome, cream data-entry surfaces with inputs ruled like ledger paper, ink-black primary actions, pale blue sidebar pills that turn teal when active, and workspace widgets tinted inside a white card. |
+| Midnight Nebula | `midnight-nebula` | Dark glass theme — a near-black indigo ground lit by violet and mint aurora glows, frosted-glass cards with a lit top edge, a translucent blurred navbar, silver-gradient page titles and silver-lavender pill primary buttons. |
+| Lavender Glass | `lavender-glass` | Light glassmorphism theme — frosted white navbar, sidebar, cards and dialogs with a bright rim and backdrop blur over a fixed pastel lavender, periwinkle and blush ground; deep navy-violet text and a violet gradient primary button keep it calm. |
 | Promantia Custom Theme | `promantia-custom` | Not a fixed palette — the colors come from the **Promantia Custom Theme** doctype, so a System Manager sets them per site without touching SCSS. Anything left blank keeps Frappe Light's default. See [Promantia Custom Theme](#promantia-custom-theme). |
 
 ## Install

@@ -1,7 +1,7 @@
 app_name = "promantia_theme"
 app_title = "Promantia Theme"
 app_publisher = "Promantia Business Solutions Pvt Ltd"
-app_description = "Desk themes for Frappe: Tekton Blue, Horizon Calm, Magenta Aurora and Paper Ledger."
+app_description = "Desk themes for Frappe: Tekton Blue, Horizon Calm, Magenta Aurora, Paper Ledger, Midnight Nebula and Lavender Glass."
 app_email = "notifications@promantia.com"
 app_license = "MIT"
 

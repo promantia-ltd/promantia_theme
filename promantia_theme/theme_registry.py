@@ -40,6 +40,16 @@ APP_DESK_THEMES = (
 		"info": "Powder-blue chrome, cream data-entry surfaces and ink-black actions",
 	},
 	{
+		"name": "midnight-nebula",
+		"label": "Midnight Nebula",
+		"info": "Dark indigo glass with violet and mint aurora glows and silver pill actions",
+	},
+	{
+		"name": "lavender-glass",
+		"label": "Lavender Glass",
+		"info": "Light glassmorphism: frosted white panels over a pastel lavender-to-blush ground",
+	},
+	{
 		"name": CUSTOM_THEME_SLUG,
 		"label": "Promantia Custom Theme",
 		"info": "Colors a System Manager configures in the Promantia Custom Theme settings",
