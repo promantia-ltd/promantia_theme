@@ -3,7 +3,7 @@ name = "promantia_theme"
 authors = [
     { name = "Promantia Business Solutions Pvt Ltd", email = "notifications@promantia.com"}
 ]
-description = "Desk themes for Frappe: Tekton Blue, Horizon Calm, Magenta Aurora and Paper Ledger."
+description = "Desk themes for Frappe: Tekton Blue, Horizon Calm, Magenta Aurora, Paper Ledger, Midnight Nebula and Lavender Glass."
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
