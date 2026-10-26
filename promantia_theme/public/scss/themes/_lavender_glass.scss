@@ -108,9 +108,16 @@
 		-webkit-font-smoothing: antialiased;
 	}
 
-	.page-container,
-	.page-head {
+	.page-container {
 		background: transparent;
+	}
+
+	/* the page head is sticky - form content scrolls under it, so it needs a near-opaque
+	   frosted fill of the ground colour, not a see-through one */
+	.page-head {
+		background: rgba(235, 231, 248, 0.92);
+		backdrop-filter: var(--theme-glass-blur);
+		-webkit-backdrop-filter: var(--theme-glass-blur);
 	}
 
 	::selection {

@@ -191,8 +191,11 @@
 
 	/* ── treatment: page head - silver gradient title ─────────────────────── */
 
+	/* sticky - content scrolls under it, so it needs a near-opaque frosted fill */
 	.page-head {
-		background: transparent;
+		background: rgba(9, 8, 26, 0.92);
+		backdrop-filter: blur(18px) saturate(140%);
+		-webkit-backdrop-filter: blur(18px) saturate(140%);
 	}
 
 	.page-title .title-text,
