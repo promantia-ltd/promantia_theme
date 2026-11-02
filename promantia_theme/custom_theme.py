@@ -16,6 +16,13 @@ LOGIN_ROUTES = ("login", "update-password")
 DESK_THEME_FIELDS = (
 	"navbar_background_color",
 	"navbar_text_color",
+	"search_bar_background_color",
+	"search_bar_text_color",
+	"search_bar_focus_background_color",
+	"search_bar_focus_text_color",
+	"search_results_background_color",
+	"search_results_text_color",
+	"search_results_hover_background_color",
 	"hide_help",
 	"hide_app_switcher",
 	"default_app",
@@ -30,8 +37,12 @@ DESK_THEME_FIELDS = (
 	"body_background_color",
 	"content_background_color",
 	"content_text_color",
+	"page_head_background_color",
+	"page_head_text_color",
+	"dark_base",
 	"sidebar_background_color",
 	"sidebar_text_color",
+	"sidebar_active_background_color",
 	"input_background_color",
 	"input_border_color",
 	"input_text_color",
@@ -40,9 +51,31 @@ DESK_THEME_FIELDS = (
 	"table_head_text_color",
 	"table_body_background_color",
 	"table_body_text_color",
+	"table_row_hover_background_color",
+	"form_tab_background_color",
+	"form_tab_text_color",
+	"form_tab_active_color",
+	"form_section_background_color",
+	"form_section_border_color",
+	"form_section_heading_color",
+	"activity_background_color",
+	"activity_heading_color",
+	"activity_text_color",
+	"activity_line_color",
+	"shortcut_background_color",
+	"shortcut_text_color",
+	"shortcut_hover_background_color",
+	"dashboard_card_background_color",
+	"dashboard_card_border_color",
 	"number_card_background_color",
 	"number_card_border_color",
 	"number_card_text_color",
+	"success_background_color",
+	"success_text_color",
+	"warning_background_color",
+	"warning_text_color",
+	"error_background_color",
+	"error_text_color",
 	"footer_background_color",
 	"footer_text_color",
 	"sticky_footer",
@@ -83,7 +116,10 @@ LOGIN_BOX_ALIGNMENT_BY_POSITION = {
 	"Right": "flex-end",
 }
 
-HEX_COLOR_PATTERN = re.compile(r"^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$")
+# Non-color fields that are part of the palette, so restoring the presets restores them too
+PALETTE_SWITCH_FIELDS = ("dark_base",)
+
+HEX_COLOR_PATTERN =re.compile(r"^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$")
 # Attached filenames on this site may contain spaces, which are legal inside a quoted CSS url().
 # Quotes, parentheses, backslashes and semicolons are excluded so the value cannot break out.
 SITE_RELATIVE_PATH_PATTERN = re.compile(r"^/[\w\-./% ]+$")
@@ -168,6 +204,16 @@ def get_custom_theme_settings():
 	return frappe.get_cached_doc(CUSTOM_THEME_DOCTYPE, CUSTOM_THEME_DOCTYPE)
 
 
+def get_preset_colors():
+	"""Returns the preset palette, which lives only as each palette field's default in the doctype."""
+	meta = frappe.get_meta(CUSTOM_THEME_DOCTYPE)
+	return {
+		df.fieldname: df.default
+		for df in meta.fields
+		if df.default and (df.fieldtype == "Color" or df.fieldname in PALETTE_SWITCH_FIELDS)
+	}
+
+
 # --- Whitelisted Methods ---
 @frappe.whitelist()
 def get_desk_custom_theme():
@@ -187,6 +233,13 @@ def get_installed_app_options():
 	"""Returns the apps the Default App select may hold, for the settings form only."""
 	frappe.only_for("System Manager")
 	return [app for app in frappe.get_installed_apps() if app != "frappe"]
+
+
+@frappe.whitelist()
+def get_preset_theme_colors():
+	"""Returns the preset palette for the settings form's Restore Default Colors button."""
+	frappe.only_for("System Manager")
+	return get_preset_colors()
 
 
 # --- Get Desk Custom Theme Helpers ---

@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 0,
  "creation": "2026-08-14 10:00:00.000000",
- "description": "Site-wide colors for the Promantia Custom Theme. Each user activates it from Toggle Theme.",
+ "description": "Site-wide colors for the Promantia Custom Theme, preset to a dark palette with a lime accent. Each user activates it from Toggle Theme.",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -14,6 +14,24 @@
   "hide_help",
   "hide_app_switcher",
   "default_app",
+  "search_bar_section",
+  "search_bar_background_color",
+  "search_bar_text_color",
+  "search_bar_focus_background_color",
+  "search_bar_focus_text_color",
+  "search_bar_column_break",
+  "search_results_background_color",
+  "search_results_text_color",
+  "search_results_hover_background_color",
+  "background_tab",
+  "body_section",
+  "body_background_color",
+  "content_background_color",
+  "body_column_break",
+  "content_text_color",
+  "page_head_background_color",
+  "page_head_text_color",
+  "dark_base",
   "buttons_tab",
   "primary_button_section",
   "primary_button_background_color",
@@ -28,15 +46,11 @@
   "secondary_button_hover_background_color",
   "secondary_button_hover_text_color",
   "desk_tab",
-  "body_section",
-  "body_background_color",
-  "content_background_color",
-  "body_column_break",
-  "content_text_color",
   "sidebar_section",
   "sidebar_background_color",
   "sidebar_column_break",
   "sidebar_text_color",
+  "sidebar_active_background_color",
   "input_section",
   "input_background_color",
   "input_border_color",
@@ -49,11 +63,49 @@
   "table_column_break",
   "table_body_background_color",
   "table_body_text_color",
+  "table_row_hover_background_color",
+  "forms_tab",
+  "form_tab_section",
+  "form_tab_background_color",
+  "form_tab_text_color",
+  "form_tab_column_break",
+  "form_tab_active_color",
+  "form_section_section",
+  "form_section_background_color",
+  "form_section_border_color",
+  "form_section_column_break",
+  "form_section_heading_color",
+  "activity_section",
+  "activity_background_color",
+  "activity_heading_color",
+  "activity_column_break",
+  "activity_text_color",
+  "activity_line_color",
+  "workspace_tab",
+  "shortcut_section",
+  "shortcut_background_color",
+  "shortcut_text_color",
+  "shortcut_column_break",
+  "shortcut_hover_background_color",
+  "dashboard_card_section",
+  "dashboard_card_background_color",
+  "dashboard_card_column_break",
+  "dashboard_card_border_color",
   "number_card_section",
   "number_card_background_color",
   "number_card_border_color",
   "number_card_column_break",
   "number_card_text_color",
+  "status_tab",
+  "status_section",
+  "success_background_color",
+  "success_text_color",
+  "status_success_column_break",
+  "warning_background_color",
+  "warning_text_color",
+  "status_warning_column_break",
+  "error_background_color",
+  "error_text_color",
   "login_tab",
   "login_page_section",
   "login_background_color",
@@ -84,17 +136,21 @@
    "label": "Navbar"
   },
   {
-   "description": "Leave a color blank to keep Frappe's own default for that element.",
+   "description": "The bar across the top of every desk page. Leave any color in this theme blank to keep Frappe's own default for that element.",
    "fieldname": "navbar_section",
    "fieldtype": "Section Break",
    "label": "Navbar"
   },
   {
+   "default": "#A3E635",
+   "description": "Behind the logo, breadcrumbs, search box and avatar.",
    "fieldname": "navbar_background_color",
    "fieldtype": "Color",
    "label": "Background Color"
   },
   {
+   "default": "#0A0A0A",
+   "description": "Logo text, breadcrumbs and the navbar icons (notifications bell).",
    "fieldname": "navbar_text_color",
    "fieldtype": "Color",
    "label": "Text Color"
@@ -126,21 +182,142 @@
    "mandatory_depends_on": "eval:doc.hide_app_switcher == 1"
   },
   {
+   "description": "The search box in the navbar. The focused colors apply while you type in it, and the results colors to the list that opens below it.",
+   "fieldname": "search_bar_section",
+   "fieldtype": "Section Break",
+   "label": "Search Bar"
+  },
+  {
+   "default": "#1C1C1C",
+   "description": "The search box while it is not in use.",
+   "fieldname": "search_bar_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "default": "#F5F5F5",
+   "description": "Typed text, the search icon and, slightly faded, the placeholder text.",
+   "fieldname": "search_bar_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "default": "#141414",
+   "description": "The search box while you type in it. Blank keeps Background Color.",
+   "fieldname": "search_bar_focus_background_color",
+   "fieldtype": "Color",
+   "label": "Focused Background Color"
+  },
+  {
+   "default": "#FAFAFA",
+   "description": "Typed text while the box is focused. Blank keeps Text Color.",
+   "fieldname": "search_bar_focus_text_color",
+   "fieldtype": "Color",
+   "label": "Focused Text Color"
+  },
+  {
+   "fieldname": "search_bar_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#141414",
+   "description": "The suggestions list that opens below the box. Blank follows Focused Background Color.",
+   "fieldname": "search_results_background_color",
+   "fieldtype": "Color",
+   "label": "Results Background Color"
+  },
+  {
+   "default": "#E5E5E5",
+   "description": "Text of each suggestion in the list.",
+   "fieldname": "search_results_text_color",
+   "fieldtype": "Color",
+   "label": "Results Text Color"
+  },
+  {
+   "default": "#1E2A10",
+   "description": "The result under the mouse or picked with the arrow keys.",
+   "fieldname": "search_results_hover_background_color",
+   "fieldtype": "Color",
+   "label": "Results Hover Background Color"
+  },
+  {
+   "fieldname": "background_tab",
+   "fieldtype": "Tab Break",
+   "label": "Background"
+  },
+  {
+   "description": "Page-level colors. With Dark Base on, Frappe's own greys, borders and text shades are generated from the first three colors here.",
+   "fieldname": "body_section",
+   "fieldtype": "Section Break",
+   "label": "Background"
+  },
+  {
+   "default": "#0A0A0A",
+   "description": "Behind everything below the navbar. Also the default for Page Header Background, and with Dark Base the base of Frappe's grey scale.",
+   "fieldname": "body_background_color",
+   "fieldtype": "Color",
+   "label": "Page Background Color"
+  },
+  {
+   "default": "#141414",
+   "description": "The main cards: forms, lists and workspace panels. With Dark Base, raised surfaces, field backgrounds and hover shades are lightened from it.",
+   "fieldname": "content_background_color",
+   "fieldtype": "Color",
+   "label": "Content Area Background Color"
+  },
+  {
+   "fieldname": "body_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#E5E5E5",
+   "description": "Text inside the main cards. With Dark Base, also Frappe's body text, muted greys, borders and scrollbars.",
+   "fieldname": "content_text_color",
+   "fieldtype": "Color",
+   "label": "Content Area Text Color"
+  },
+  {
+   "default": "#0A0A0A",
+   "description": "The sticky bar holding the page title and its action buttons. Blank follows Page Background Color.",
+   "fieldname": "page_head_background_color",
+   "fieldtype": "Color",
+   "label": "Page Header Background Color"
+  },
+  {
+   "default": "#FFFFFF",
+   "description": "The page title and the sidebar toggle beside it.",
+   "fieldname": "page_head_text_color",
+   "fieldtype": "Color",
+   "label": "Page Header Text Color"
+  },
+  {
+   "default": "1",
+   "description": "Turns Frappe's own text, borders, menus and dialogs dark-friendly. Keep it on with dark background colors, turn it off with light ones.",
+   "fieldname": "dark_base",
+   "fieldtype": "Check",
+   "label": "Dark Base"
+  },
+  {
    "fieldname": "buttons_tab",
    "fieldtype": "Tab Break",
    "label": "Buttons"
   },
   {
+   "description": "Main action buttons such as Save, Submit and + Add.",
    "fieldname": "primary_button_section",
    "fieldtype": "Section Break",
    "label": "Primary Button"
   },
   {
+   "default": "#A3E635",
+   "description": "With Dark Base, also the accent: active highlights, focus rings, checkboxes, the selected date and highlighted suggestions.",
    "fieldname": "primary_button_background_color",
    "fieldtype": "Color",
    "label": "Background Color"
   },
   {
+   "default": "#0A0A0A",
+   "description": "Button label. With Dark Base, also the text of the selected date in date pickers.",
    "fieldname": "primary_button_text_color",
    "fieldtype": "Color",
    "label": "Text Color"
@@ -150,26 +327,35 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "#BEF264",
+   "description": "Blank keeps Background Color on hover.",
    "fieldname": "primary_button_hover_background_color",
    "fieldtype": "Color",
    "label": "Hover Background Color"
   },
   {
+   "default": "#0A0A0A",
+   "description": "Blank keeps Text Color on hover.",
    "fieldname": "primary_button_hover_text_color",
    "fieldtype": "Color",
    "label": "Hover Text Color"
   },
   {
+   "description": "Standard buttons such as Get Items From, Refresh, List View and the ... menu.",
    "fieldname": "secondary_button_section",
    "fieldtype": "Section Break",
    "label": "Secondary Button"
   },
   {
+   "default": "#1F1F1F",
+   "description": "Behind the button label.",
    "fieldname": "secondary_button_background_color",
    "fieldtype": "Color",
    "label": "Background Color"
   },
   {
+   "default": "#F5F5F5",
+   "description": "Button label and icon.",
    "fieldname": "secondary_button_text_color",
    "fieldtype": "Color",
    "label": "Text Color"
@@ -179,11 +365,15 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "#2A2A2A",
+   "description": "Blank uses Frappe's own hover shade.",
    "fieldname": "secondary_button_hover_background_color",
    "fieldtype": "Color",
    "label": "Hover Background Color"
   },
   {
+   "default": "#FFFFFF",
+   "description": "Blank keeps Text Color on hover.",
    "fieldname": "secondary_button_hover_text_color",
    "fieldtype": "Color",
    "label": "Hover Text Color"
@@ -194,35 +384,14 @@
    "label": "Desk"
   },
   {
-   "fieldname": "body_section",
-   "fieldtype": "Section Break",
-   "label": "Body"
-  },
-  {
-   "fieldname": "body_background_color",
-   "fieldtype": "Color",
-   "label": "Page Background Color"
-  },
-  {
-   "fieldname": "content_background_color",
-   "fieldtype": "Color",
-   "label": "Content Area Background Color"
-  },
-  {
-   "fieldname": "body_column_break",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "content_text_color",
-   "fieldtype": "Color",
-   "label": "Content Area Text Color"
-  },
-  {
+   "description": "The left column on workspaces, lists and forms.",
    "fieldname": "sidebar_section",
    "fieldtype": "Section Break",
    "label": "Sidebar"
   },
   {
+   "default": "#0A0A0A",
+   "description": "Behind the sidebar column.",
    "fieldname": "sidebar_background_color",
    "fieldtype": "Color",
    "label": "Background Color"
@@ -232,21 +401,34 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "#D4D4D4",
+   "description": "Sidebar headings, workspace names and filter labels.",
    "fieldname": "sidebar_text_color",
    "fieldtype": "Color",
    "label": "Text Color"
   },
   {
+   "default": "#1E2A10",
+   "description": "The selected and hovered sidebar item. Also a selected row in report view.",
+   "fieldname": "sidebar_active_background_color",
+   "fieldtype": "Color",
+   "label": "Active Item Background Color"
+  },
+  {
+   "description": "Every form field, list filter box and dialog field.",
    "fieldname": "input_section",
    "fieldtype": "Section Break",
    "label": "Inputs"
   },
   {
+   "default": "#1C1C1C",
+   "description": "Inside each field.",
    "fieldname": "input_background_color",
    "fieldtype": "Color",
    "label": "Background Color"
   },
   {
+   "default": "#2E2E2E",
    "description": "Frappe's inputs ship without a border - setting this draws one.",
    "fieldname": "input_border_color",
    "fieldtype": "Color",
@@ -257,26 +439,35 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "#F5F5F5",
+   "description": "Text typed into a field.",
    "fieldname": "input_text_color",
    "fieldtype": "Color",
    "label": "Text Color"
   },
   {
+   "default": "#A3A3A3",
+   "description": "The label above each field.",
    "fieldname": "input_label_color",
    "fieldtype": "Color",
    "label": "Label Color"
   },
   {
+   "description": "List view, report view and the child tables inside forms.",
    "fieldname": "table_section",
    "fieldtype": "Section Break",
    "label": "Lists and Tables"
   },
   {
+   "default": "#1A1A1A",
+   "description": "The column header row. With Dark Base, also Frappe's subtle background, which other apps' list headers use (NTPT sticky columns).",
    "fieldname": "table_head_background_color",
    "fieldtype": "Color",
    "label": "Head Background Color"
   },
   {
+   "default": "#A3A3A3",
+   "description": "Column header text.",
    "fieldname": "table_head_text_color",
    "fieldtype": "Color",
    "label": "Head Text Color"
@@ -286,26 +477,207 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "#141414",
+   "description": "Each row of a list, report or table.",
    "fieldname": "table_body_background_color",
    "fieldtype": "Color",
    "label": "Body Background Color"
   },
   {
+   "default": "#E5E5E5",
+   "description": "Row text.",
    "fieldname": "table_body_text_color",
    "fieldtype": "Color",
    "label": "Body Text Color"
   },
   {
+   "default": "#1F1F1F",
+   "description": "The row under the mouse in list and report view. With Dark Base, also Frappe's highlight color.",
+   "fieldname": "table_row_hover_background_color",
+   "fieldtype": "Color",
+   "label": "Row Hover Background Color"
+  },
+  {
+   "fieldname": "forms_tab",
+   "fieldtype": "Tab Break",
+   "label": "Forms"
+  },
+  {
+   "description": "The tab strip at the top of a form (Details, Payments, ...).",
+   "fieldname": "form_tab_section",
+   "fieldtype": "Section Break",
+   "label": "Form Tabs"
+  },
+  {
+   "default": "#141414",
+   "description": "Behind the tab strip.",
+   "fieldname": "form_tab_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "default": "#A3A3A3",
+   "description": "Tabs that are not open.",
+   "fieldname": "form_tab_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "form_tab_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#A3E635",
+   "description": "Text and underline of the open tab.",
+   "fieldname": "form_tab_active_color",
+   "fieldtype": "Color",
+   "label": "Active Tab Color"
+  },
+  {
+   "description": "The blocks inside a form, separated by divider lines.",
+   "fieldname": "form_section_section",
+   "fieldtype": "Section Break",
+   "label": "Form Sections"
+  },
+  {
+   "default": "#141414",
+   "description": "Behind each form section and the Connections dashboard.",
+   "fieldname": "form_section_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "default": "#262626",
+   "description": "The line between sections.",
+   "fieldname": "form_section_border_color",
+   "fieldtype": "Color",
+   "label": "Divider Color"
+  },
+  {
+   "fieldname": "form_section_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#FFFFFF",
+   "description": "Section titles such as Items or Accounting Dimensions.",
+   "fieldname": "form_section_heading_color",
+   "fieldtype": "Color",
+   "label": "Heading Text Color"
+  },
+  {
+   "description": "The area below a saved form: the Comments box and the Activity timeline.",
+   "fieldname": "activity_section",
+   "fieldtype": "Section Break",
+   "label": "Comments & Activity"
+  },
+  {
+   "default": "#0A0A0A",
+   "description": "Behind the Activity heading bar and the timeline dots - match it to the page background.",
+   "fieldname": "activity_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "default": "#FFFFFF",
+   "description": "The Comments and Activity headings, and the old and new values in change entries.",
+   "fieldname": "activity_heading_color",
+   "fieldtype": "Color",
+   "label": "Heading Text Color"
+  },
+  {
+   "fieldname": "activity_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#A3A3A3",
+   "description": "Timeline entries and their timestamps.",
+   "fieldname": "activity_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "default": "#525252",
+   "description": "The vertical timeline line and its dots.",
+   "fieldname": "activity_line_color",
+   "fieldtype": "Color",
+   "label": "Timeline Line Color"
+  },
+  {
+   "fieldname": "workspace_tab",
+   "fieldtype": "Tab Break",
+   "label": "Workspace"
+  },
+  {
+   "description": "Shortcut tiles at the top of a workspace.",
+   "fieldname": "shortcut_section",
+   "fieldtype": "Section Break",
+   "label": "Shortcuts"
+  },
+  {
+   "default": "#141414",
+   "description": "Each tile.",
+   "fieldname": "shortcut_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "default": "#F5F5F5",
+   "description": "Tile titles.",
+   "fieldname": "shortcut_text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "shortcut_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#1E2A10",
+   "description": "The tile under the mouse. Blank keeps Background Color.",
+   "fieldname": "shortcut_hover_background_color",
+   "fieldtype": "Color",
+   "label": "Hover Background Color"
+  },
+  {
+   "description": "Chart, card-link and quick-list widgets on workspaces and dashboards.",
+   "fieldname": "dashboard_card_section",
+   "fieldtype": "Section Break",
+   "label": "Dashboard Cards"
+  },
+  {
+   "default": "#141414",
+   "description": "Behind each card.",
+   "fieldname": "dashboard_card_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "dashboard_card_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#262626",
+   "description": "The card outline.",
+   "fieldname": "dashboard_card_border_color",
+   "fieldtype": "Color",
+   "label": "Border Color"
+  },
+  {
+   "description": "Single-figure cards such as Total Outgoing Bills.",
    "fieldname": "number_card_section",
    "fieldtype": "Section Break",
    "label": "Number Cards"
   },
   {
+   "default": "#141414",
+   "description": "Behind each card.",
    "fieldname": "number_card_background_color",
    "fieldtype": "Color",
    "label": "Background Color"
   },
   {
+   "default": "#262626",
+   "description": "The card outline.",
    "fieldname": "number_card_border_color",
    "fieldtype": "Color",
    "label": "Border Color"
@@ -315,9 +687,72 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "#F5F5F5",
+   "description": "Card title, figure and trend text.",
    "fieldname": "number_card_text_color",
    "fieldtype": "Color",
    "label": "Text Color"
+  },
+  {
+   "fieldname": "status_tab",
+   "fieldtype": "Tab Break",
+   "label": "Status Colors"
+  },
+  {
+   "description": "Wherever Frappe shows a status: pills (Paid, Draft), form intro messages and pop-up alerts. Backgrounds apply to all three, text colors to pills and intro messages. With Dark Base, also Frappe's own green, amber and red tints.",
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status Colors"
+  },
+  {
+   "default": "#14301D",
+   "description": "Green statuses such as Paid or Completed, and success alerts.",
+   "fieldname": "success_background_color",
+   "fieldtype": "Color",
+   "label": "Success Background Color"
+  },
+  {
+   "default": "#86EFAC",
+   "description": "Text and dot of green status pills.",
+   "fieldname": "success_text_color",
+   "fieldtype": "Color",
+   "label": "Success Text Color"
+  },
+  {
+   "fieldname": "status_success_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#33270B",
+   "description": "Orange and yellow statuses such as Not Saved or Overdue, and warning alerts.",
+   "fieldname": "warning_background_color",
+   "fieldtype": "Color",
+   "label": "Warning Background Color"
+  },
+  {
+   "default": "#FCD34D",
+   "description": "Text and dot of orange and yellow status pills.",
+   "fieldname": "warning_text_color",
+   "fieldtype": "Color",
+   "label": "Warning Text Color"
+  },
+  {
+   "fieldname": "status_warning_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#3A1515",
+   "description": "Red statuses such as Draft or Cancelled, and error alerts.",
+   "fieldname": "error_background_color",
+   "fieldtype": "Color",
+   "label": "Error Background Color"
+  },
+  {
+   "default": "#FCA5A5",
+   "description": "Text and dot of red status pills.",
+   "fieldname": "error_text_color",
+   "fieldtype": "Color",
+   "label": "Error Text Color"
   },
   {
    "fieldname": "login_tab",
@@ -331,11 +766,13 @@
    "label": "Login Page"
   },
   {
+   "description": "Behind the login box.",
    "fieldname": "login_background_color",
    "fieldtype": "Color",
    "label": "Page Background Color"
   },
   {
+   "description": "Covers the page background color when set.",
    "fieldname": "login_background_image",
    "fieldtype": "Attach Image",
    "label": "Page Background Image",
@@ -346,33 +783,39 @@
    "fieldtype": "Column Break"
   },
   {
+   "description": "The card holding the login form.",
    "fieldname": "login_box_background_color",
    "fieldtype": "Color",
    "label": "Login Box Background Color"
   },
   {
    "default": "Default",
+   "description": "Where the login box sits on wide screens.",
    "fieldname": "login_box_position",
    "fieldtype": "Select",
    "label": "Login Box Position",
    "options": "Default\nLeft\nRight"
   },
   {
+   "description": "The title above the login form.",
    "fieldname": "login_heading_text_color",
    "fieldtype": "Color",
    "label": "Heading Text Color"
   },
   {
+   "description": "The Login button, and the button on the forgot-password form.",
    "fieldname": "login_button_section",
    "fieldtype": "Section Break",
    "label": "Login Button"
   },
   {
+   "description": "Behind the button label.",
    "fieldname": "login_button_background_color",
    "fieldtype": "Color",
    "label": "Background Color"
   },
   {
+   "description": "Button label.",
    "fieldname": "login_button_text_color",
    "fieldtype": "Color",
    "label": "Text Color"
@@ -382,11 +825,13 @@
    "fieldtype": "Column Break"
   },
   {
+   "description": "Background while the mouse is over the button.",
    "fieldname": "login_button_hover_background_color",
    "fieldtype": "Color",
    "label": "Hover Background Color"
   },
   {
+   "description": "Text while the mouse is over the button.",
    "fieldname": "login_button_hover_text_color",
    "fieldtype": "Color",
    "label": "Hover Text Color"
@@ -403,6 +848,7 @@
    "label": "Desk Footer"
   },
   {
+   "description": "Shown on the left of the footer.",
    "fieldname": "copyright_text",
    "fieldtype": "Data",
    "label": "Copyright Text"
@@ -418,11 +864,15 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "#0A0A0A",
+   "description": "The footer bar.",
    "fieldname": "footer_background_color",
    "fieldtype": "Color",
    "label": "Background Color"
   },
   {
+   "default": "#A3A3A3",
+   "description": "Copyright and powered-by text.",
    "fieldname": "footer_text_color",
    "fieldtype": "Color",
    "label": "Text Color"
@@ -439,7 +889,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-08-14 10:00:00.000000",
+ "modified": "2026-11-02 17:00:00.000000",
  "modified_by": "Administrator",
  "module": "Promantia Theme",
  "name": "Promantia Custom Theme",

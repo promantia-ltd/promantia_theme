@@ -3,11 +3,156 @@
 // element scoped to this same selector, and removes it the moment another theme is picked.
 //
 // Every declaration below falls back to frappe's own variable for that element, so a field left
-// blank in Promantia Custom Theme leaves frappe's default appearance exactly as it was. Nothing
-// here redefines a frappe variable, which is what keeps the fallbacks honest: `--navbar-bg` still
-// holds frappe's value and can be read as the fallback for `--ptc-navbar-bg`.
+// blank in Promantia Custom Theme leaves frappe's default appearance exactly as it was. Outside the
+// dark base below, nothing here redefines a frappe variable, which is what keeps the fallbacks
+// honest: `--navbar-bg` still holds frappe's value and can be read as the fallback for
+// `--ptc-navbar-bg`. With Dark Base on, frappe's variables become the dark palette, so every
+// fallback - and every element without a field of its own - turns dark along with the theme.
+
+// frappe's indicator colors, grouped under the status color field that restyles them
+$ptc-status-indicator-colors: (
+	"success": ("green"),
+	"warning": ("yellow", "orange"),
+	"error": ("red"),
+);
 
 [data-theme="promantia-custom"] {
+	/* ── dark base ────────────────────────────────────────────────────────── */
+
+	/* switched on by the Dark Base field. Every tone is derived from four configured colors - page
+	   background, content background, content text and the primary button - so frappe's own text,
+	   borders, menus and dialogs follow the fields; changing one recolors everything derived from
+	   it. The literals in the four inputs apply only while that field is blank. It never reads a
+	   frappe variable it defines. */
+	&.promantia-dark-base {
+		/* inputs */
+		--ptc-dark-bg: var(--ptc-body-bg, #0a0a0a);
+		--ptc-dark-surface: var(--ptc-content-bg, #141414);
+		--ptc-dark-text: var(--ptc-content-color, #e5e5e5);
+		--ptc-dark-accent: var(--ptc-btn-primary-bg, #a3e635);
+
+		/* surfaces - the content surface, lifted in small steps toward the text color */
+		--theme-bg: var(--ptc-dark-bg);
+		--theme-surface-1: var(--ptc-dark-surface);
+		--theme-surface-2: color-mix(in srgb, var(--ptc-dark-text) 3%, var(--ptc-dark-surface));
+		--theme-surface-3: color-mix(in srgb, var(--ptc-dark-text) 6%, var(--ptc-dark-surface));
+		--theme-surface-hover: color-mix(in srgb, var(--ptc-dark-text) 10%, var(--ptc-dark-surface));
+		--theme-sidebar: transparent;
+
+		/* hairlines - the text color, faint enough to read as an edge */
+		--theme-hairline: color-mix(in srgb, var(--ptc-dark-text) 10%, transparent);
+		--theme-hairline-2: color-mix(in srgb, var(--ptc-dark-text) 6%, transparent);
+		--theme-hairline-strong: color-mix(in srgb, var(--ptc-dark-text) 18%, transparent);
+
+		/* text - headings a step brighter than body text, muted levels faded into the surface */
+		--theme-text-1: color-mix(in srgb, var(--ptc-dark-text) 30%, white);
+		--theme-text-2: var(--ptc-dark-text);
+		--theme-text-3: color-mix(in srgb, var(--ptc-dark-text) 65%, var(--ptc-dark-surface));
+		--theme-text-4: color-mix(in srgb, var(--ptc-dark-text) 55%, var(--ptc-dark-surface));
+
+		/* accent - the primary button color, so links, focus rings and checkboxes match it */
+		--theme-accent: var(--ptc-dark-accent);
+		--theme-accent-ink: color-mix(in srgb, var(--ptc-dark-accent) 75%, white);
+		--theme-accent-bright: var(--theme-accent-ink);
+		--theme-accent-soft: color-mix(in srgb, var(--ptc-dark-accent) 14%, transparent);
+		--theme-accent-line: color-mix(in srgb, var(--ptc-dark-accent) 45%, transparent);
+
+		/* semantics - the status color fields. Violet has no field of its own, so frappe's purple
+		   and pink pills take the accent instead of a hue nobody configured */
+		--theme-green: var(--ptc-success-color, #86efac);
+		--theme-green-soft: var(--ptc-success-bg, #14301d);
+		--theme-amber: var(--ptc-warning-color, #fcd34d);
+		--theme-amber-soft: var(--ptc-warning-bg, #33270b);
+		--theme-red: var(--ptc-error-color, #fca5a5);
+		--theme-red-soft: var(--ptc-error-bg, #3a1515);
+		--theme-violet: var(--theme-accent-ink);
+		--theme-violet-soft: var(--theme-accent-soft);
+
+		/* neutral ramp, light-to-dark like frappe's so its gray-N references keep their meaning -
+		   heading text faded step by step into the page background */
+		--theme-gray-50: var(--theme-text-1);
+		--theme-gray-100: color-mix(in srgb, var(--theme-text-1) 96%, var(--ptc-dark-bg));
+		--theme-gray-200: color-mix(in srgb, var(--theme-text-1) 90%, var(--ptc-dark-bg));
+		--theme-gray-300: color-mix(in srgb, var(--theme-text-1) 82%, var(--ptc-dark-bg));
+		--theme-gray-400: color-mix(in srgb, var(--theme-text-1) 64%, var(--ptc-dark-bg));
+		--theme-gray-500: color-mix(in srgb, var(--theme-text-1) 46%, var(--ptc-dark-bg));
+		--theme-gray-600: color-mix(in srgb, var(--theme-text-1) 33%, var(--ptc-dark-bg));
+		--theme-gray-700: color-mix(in srgb, var(--theme-text-1) 24%, var(--ptc-dark-bg));
+		--theme-gray-800: color-mix(in srgb, var(--theme-text-1) 14%, var(--ptc-dark-bg));
+		--theme-gray-900: color-mix(in srgb, var(--theme-text-1) 6%, var(--ptc-dark-bg));
+
+		/* depth - shadows are black whatever the palette, since they stand for absent light; the
+		   outer ring is the faint hairline */
+		--theme-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+		--theme-shadow-2: 0 8px 24px rgba(0, 0, 0, 0.5);
+		--theme-shadow-3: 0 16px 44px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--theme-hairline-2);
+		--theme-shadow-pop: 0 28px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--theme-hairline-2);
+
+		/* radii and font - frappe's own values, so only the colors change */
+		--theme-radius-tiny: 4px;
+		--theme-radius-sm: 8px;
+		--theme-radius-base: 8px;
+		--theme-radius-md: 10px;
+		--theme-radius-lg: 12px;
+		--theme-radius-xl: 16px;
+		--theme-radius-2xl: 20px;
+		--theme-font-stack: "InterVariable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+			"Roboto", "Helvetica Neue", sans-serif;
+
+		/* chrome */
+		--theme-navbar-bg: var(--ptc-navbar-bg, var(--ptc-dark-bg));
+		--theme-scrollbar-thumb: color-mix(in srgb, var(--ptc-dark-text) 16%, transparent);
+		--theme-scrollbar-track: transparent;
+
+		@include desk_theme_tokens;
+		@include desk_theme_widget_tokens;
+
+		/* dark-mode variables the shared token layer does not cover */
+		--neutral: var(--neutral-black);
+		--invert-neutral: var(--neutral-white);
+		--text-dark: var(--theme-gray-900);
+		--timeline-badge-color: var(--theme-text-3);
+		--timeline-badge-bg: var(--theme-surface-2);
+		/* the selected date is drawn like a primary button */
+		--date-active-text: var(--ptc-btn-primary-color, var(--neutral-black));
+		--date-active-bg: var(--theme-accent);
+		--date-range-bg: var(--theme-accent-soft);
+		--switch-bg: var(--theme-gray-600);
+		--kanban-column-bg: var(--theme-surface-1);
+		--kanban-card-bg: var(--theme-surface-3);
+		--kanban-new-card-bg: var(--theme-surface-2);
+		--kanban-new-card-hover-bg: var(--theme-surface-hover);
+		--avatar-frame-color: var(--theme-text-2);
+		--avatar-frame-bg: var(--theme-surface-3);
+		--avatar-frame-border: var(--theme-hairline);
+
+		/* frappe's list header and row-hover variables follow the table fields, so code from
+		   other apps that paints list rows with them stays in step with this theme's lists */
+		--subtle-fg: var(--ptc-table-head-bg, var(--theme-surface-3));
+		--highlight-color: var(--ptc-table-row-hover-bg, var(--theme-accent-soft));
+
+		color-scheme: dark;
+
+		/* frappe pins the workspace scrollbars to --gray-200 unless data-theme is "dark", and
+		   gray-200 is near-white on this ramp */
+		[data-page-route="Workspaces"] .layout-main {
+			.layout-side-section,
+			.layout-main-section-wrapper {
+				scrollbar-color: var(--theme-scrollbar-thumb) transparent;
+
+				&::-webkit-scrollbar-thumb {
+					background: var(--theme-scrollbar-thumb);
+				}
+			}
+		}
+
+		/* print previews are paper, whatever the desk around them looks like */
+		.print-format {
+			--text-color: #1f272e;
+			--border-color: #ededed;
+		}
+	}
+
 	/* ── navbar ───────────────────────────────────────────────────────────── */
 
 	.navbar {
@@ -26,6 +171,52 @@
 	.navbar .icon use,
 	.navbar .es-icon use {
 		stroke: var(--ptc-navbar-color, var(--icon-stroke));
+	}
+
+	/* ── navbar search (awesome bar) ──────────────────────────────────────── */
+
+	/* the search box sits on the navbar but is drawn as a field, so the navbar text color would
+	   leave its icon and placeholder unreadable on a dark box - it takes its own colors instead */
+	.navbar .search-bar .icon use {
+		stroke: var(--ptc-search-bar-color, var(--text-light));
+	}
+
+	.search-bar .awesomplete {
+		input {
+			background-color: var(--ptc-search-bar-bg, var(--control-bg));
+			color: var(--ptc-search-bar-color, var(--text-color));
+
+			&::placeholder {
+				color: var(--ptc-search-bar-color, var(--text-light));
+				opacity: 0.7;
+			}
+
+			/* each focused color falls back to the resting one before frappe's, so setting only
+			   the resting colors does not leave the focused box reverting to frappe's white */
+			&:focus {
+				background-color: var(--ptc-search-bar-focus-bg, var(--ptc-search-bar-bg, var(--awesomebar-focus-bg)));
+				color: var(--ptc-search-bar-focus-color, var(--ptc-search-bar-color, var(--text-color)));
+			}
+		}
+
+		/* the results list opens beneath the focused box, so it follows the focused background */
+		& > [role="listbox"] {
+			background-color: var(--ptc-search-results-bg, var(--ptc-search-bar-focus-bg, var(--bg-color)));
+
+			& > li,
+			& > [role="option"],
+			& > li .link-option {
+				color: var(--ptc-search-results-color, var(--text-color));
+			}
+
+			& > li:hover,
+			& > li[aria-selected="true"],
+			& > [role="option"]:hover,
+			& > [role="option"][aria-selected="true"] {
+				background-color: var(--ptc-search-results-hover-bg, var(--awesomplete-hover-bg));
+				color: var(--ptc-search-results-color, var(--text-color));
+			}
+		}
 	}
 
 	/* ── buttons ──────────────────────────────────────────────────────────── */
@@ -55,9 +246,21 @@
 	/* ── body and content area ────────────────────────────────────────────── */
 
 	body,
-	.page-head,
 	.content.page-container {
 		background-color: var(--ptc-body-bg, var(--bg-color));
+	}
+
+	/* the sticky title bar follows the page background unless it is given its own */
+	.page-head {
+		background-color: var(--ptc-page-head-bg, var(--ptc-body-bg, var(--bg-color)));
+	}
+
+	.page-head .title-text {
+		color: var(--ptc-page-head-color, var(--heading-color));
+	}
+
+	.page-head .sidebar-toggle-btn .icon use {
+		stroke: var(--ptc-page-head-color, var(--icon-stroke));
 	}
 
 	.layout-main-section,
@@ -81,6 +284,15 @@
 		color: var(--ptc-sidebar-color, var(--text-color));
 	}
 
+	/* frappe paints hover, keyboard focus and the selected item with one color, so this does too */
+	.standard-sidebar-item {
+		&:hover,
+		&:focus-within,
+		&.selected {
+			background-color: var(--ptc-sidebar-active-bg, var(--sidebar-select-color));
+		}
+	}
+
 	/* ── inputs ───────────────────────────────────────────────────────────── */
 
 	/* frappe's inputs carry `border: none`, so the border color is drawn as a box-shadow ring -
@@ -97,9 +309,17 @@
 
 	/* ── lists and tables ─────────────────────────────────────────────────── */
 
+	/* .grid-heading-row is the head of a child table inside a form */
 	.list-row-head,
+	.grid-heading-row,
 	.table thead th,
 	table.table thead th {
+		background-color: var(--ptc-table-head-bg, var(--subtle-fg));
+		color: var(--ptc-table-head-color, var(--text-muted));
+	}
+
+	/* report view - mirrors frappe's own selector chain so it is outranked without !important */
+	.datatable .dt-header .dt-cell--header .dt-cell__content {
 		background-color: var(--ptc-table-head-bg, var(--subtle-fg));
 		color: var(--ptc-table-head-color, var(--text-muted));
 	}
@@ -117,6 +337,139 @@
 		color: var(--ptc-table-body-color, var(--text-color));
 	}
 
+	.list-row:hover:not(.list-row-head) {
+		background-color: var(--ptc-table-row-hover-bg, var(--highlight-color));
+	}
+
+	/* report view on sites where the tabulator app replaces frappe's datatable. Its stylesheet is
+	   light and hard-coded, so it reads the same table fields; each selector mirrors tabulator's
+	   own plus the theme scope, which outranks it without !important */
+	.tabulator,
+	.tabulator-row,
+	.tabulator-row.tabulator-row-even {
+		background-color: var(--ptc-table-body-bg, var(--card-bg));
+		color: var(--ptc-table-body-color, var(--text-color));
+		border-color: var(--border-color);
+	}
+
+	.tabulator .tabulator-header,
+	.tabulator .tabulator-header .tabulator-col,
+	.tabulator .tabulator-footer {
+		background-color: var(--ptc-table-head-bg, var(--subtle-fg));
+		color: var(--ptc-table-head-color, var(--text-muted));
+		border-color: var(--border-color);
+	}
+
+	.tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover,
+	.tabulator-row.tabulator-selectable:hover {
+		background-color: var(--ptc-table-row-hover-bg, var(--highlight-color));
+	}
+
+	/* a selected row reads like the selected sidebar item */
+	.tabulator-row.tabulator-selected,
+	.tabulator-row.tabulator-selected:hover {
+		background-color: var(--ptc-sidebar-active-bg, var(--highlight-color));
+	}
+
+	.tabulator-row .tabulator-cell {
+		border-color: var(--border-color);
+	}
+
+	/* ── form tabs ────────────────────────────────────────────────────────── */
+
+	/* frappe paints each tab link as well as the bar, so both take the configured background */
+	.form-tabs-list,
+	.form-tabs-list .form-tabs .nav-item .nav-link {
+		background-color: var(--ptc-form-tab-bg, var(--card-bg));
+	}
+
+	.form-tabs-list .form-tabs .nav-item .nav-link {
+		color: var(--ptc-form-tab-color, var(--text-muted));
+
+		&.active {
+			color: var(--ptc-form-tab-active-color, var(--text-color));
+			border-bottom-color: var(--ptc-form-tab-active-color, var(--primary));
+		}
+	}
+
+	/* ── form sections ────────────────────────────────────────────────────── */
+
+	.form-section.card-section,
+	.form-dashboard-section {
+		background-color: var(--ptc-form-section-bg, transparent);
+		border-bottom-color: var(--ptc-form-section-border, var(--border-color));
+	}
+
+	.form-section .section-head {
+		color: var(--ptc-form-section-heading-color, var(--text-color));
+	}
+
+	/* ── comments and activity ────────────────────────────────────────────── */
+
+	/* the heading bar and each dot are painted so the timeline line appears to pass behind them,
+	   which is why both take the same background */
+	.new-timeline {
+		.activity-title,
+		.timeline-actions,
+		.timeline-dot {
+			background-color: var(--ptc-activity-bg, var(--bg-color));
+		}
+
+		.activity-title h4 {
+			color: var(--ptc-activity-heading-color, var(--heading-color));
+		}
+
+		/* most entries are links to their version record, which frappe's global `a` colors */
+		.timeline-item {
+			color: var(--ptc-activity-color, inherit);
+
+			a {
+				color: var(--ptc-activity-color, var(--text-color));
+			}
+
+			/* the old and new values inside a change entry stand out at heading strength */
+			b {
+				color: var(--ptc-activity-heading-color, var(--text-color));
+			}
+		}
+
+		&::before {
+			border-left-color: var(--ptc-activity-line, var(--dark-border-color));
+		}
+
+		.timeline-dot::before {
+			background: var(--ptc-activity-line, var(--timeline-badge-color));
+		}
+	}
+
+	.comment-box .comment-input-header {
+		color: var(--ptc-activity-heading-color, var(--heading-color));
+	}
+
+	/* ── workspace shortcuts ──────────────────────────────────────────────── */
+
+	/* the hover text color stays frappe's own, which it sets with !important */
+	.widget.shortcut-widget-box {
+		background-color: var(--ptc-shortcut-bg, var(--card-bg));
+
+		.widget-title {
+			color: var(--ptc-shortcut-color, var(--text-color));
+		}
+
+		&:hover {
+			background-color: var(--ptc-shortcut-hover-bg, var(--ptc-shortcut-bg, var(--card-bg)));
+		}
+	}
+
+	/* ── dashboard cards ──────────────────────────────────────────────────── */
+
+	.widget.dashboard-widget-box,
+	.widget.links-widget-box,
+	.widget.quick-list-widget-box {
+		background-color: var(--ptc-dashboard-card-bg, var(--card-bg));
+		border-color: var(--ptc-dashboard-card-border, var(--border-color));
+	}
+
 	/* ── number cards ─────────────────────────────────────────────────────── */
 
 	.widget.number-widget-box {
@@ -128,6 +481,37 @@
 		.widget-content .number,
 		.widget-content .card-stats {
 			color: var(--ptc-card-color, var(--text-color));
+		}
+	}
+
+	/* ── status colors ────────────────────────────────────────────────────── */
+
+	/* each status restyles the frappe indicator colors that stand for it, wherever frappe uses
+	   them: status pills, form intro messages (frm.set_intro) and toasts (frappe.show_alert).
+	   Toast text keeps frappe's own color, which is set on its inner elements. */
+	@each $status, $indicator-colors in $ptc-status-indicator-colors {
+		@each $color in $indicator-colors {
+			.indicator-pill.#{$color},
+			.indicator-pill-right.#{$color},
+			.indicator-pill-round.#{$color} {
+				background: var(--ptc-#{$status}-bg, var(--bg-#{$color}));
+				color: var(--ptc-#{$status}-color, var(--text-on-#{$color}));
+
+				&::before,
+				&::after {
+					background: var(--ptc-#{$status}-color, var(--text-on-#{$color}));
+				}
+			}
+
+			.form-message.#{$color} {
+				border-color: var(--ptc-#{$status}-bg, var(--#{$color}-100));
+				background: var(--ptc-#{$status}-bg, var(--#{$color}-100));
+				color: var(--ptc-#{$status}-color, var(--#{$color}-800));
+			}
+
+			.desk-alert.#{$color} {
+				background-color: var(--ptc-#{$status}-bg, var(--toast-bg));
+			}
 		}
 	}
 

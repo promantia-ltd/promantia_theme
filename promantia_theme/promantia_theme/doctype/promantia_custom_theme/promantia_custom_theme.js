@@ -3,6 +3,7 @@ frappe.ui.form.on("Promantia Custom Theme", {
 	refresh(frm) {
 		frm.events.load_default_app_options(frm);
 		frm.events.add_apply_theme_button(frm);
+		frm.events.add_restore_default_colors_button(frm);
 	},
 
 	// --- Field Change Events ---
@@ -30,6 +31,25 @@ frappe.ui.form.on("Promantia Custom Theme", {
 
 			promantia_theme.custom_theme.refresh();
 			frappe.show_alert({ message: __("Theme applied"), indicator: "green" });
+		});
+	},
+
+	// Fills the form only - nothing changes until the System Manager reviews and saves
+	add_restore_default_colors_button(frm) {
+		frm.add_custom_button(__("Restore Default Colors"), () => {
+			frappe.confirm(
+				__("Replace every desk color with the preset palette? Login page colors are left as they are."),
+				async () => {
+					const colors = await frappe.xcall(
+						"promantia_theme.custom_theme.get_preset_theme_colors"
+					);
+					await frm.set_value(colors);
+					frappe.show_alert({
+						message: __("Default colors restored. Save to keep them."),
+						indicator: "blue",
+					});
+				}
+			);
 		});
 	},
 });
